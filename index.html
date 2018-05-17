@@ -5,13 +5,13 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Registration Numberplates</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -20,7 +20,7 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/registration_numbers.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -33,11 +33,21 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Basic Page</h4>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+      <div class="twelve columns">
+        <h1>Registration Plates</h1>
       </div>
     </div>
+
+    <div class="row">
+      <div class="four columns" >
+        <h4>Registration Number: </h4>
+      </div>
+
+      <div class="four columns" >
+        <input id="numberPlate" onfocus="this.value=''"  onkeyup="lettersOnly(this)" value="" placeholder="enter Number_Plate" class="text-name"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
+      </div>
+    </div>
+    
   </div>
 
 <!-- End Document
