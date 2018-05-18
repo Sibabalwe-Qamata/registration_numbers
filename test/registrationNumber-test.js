@@ -1,6 +1,6 @@
-describe('The Greet function', function() 
+describe('The Registration Number Plates function', function() 
 {
-  it('It should Greet the user (Siba) with the proper language and name (i.e Hello, Siba)',
+  it('It should return the Number plates of the Town Given.',
     function() {
       var numbers = numberPlates({});
      });
