@@ -44,13 +44,53 @@
       </div>
 
       <div class="four columns" >
-        <input id="numberPlate" onfocus="this.value=''"  onkeyup="lettersOnly(this)" value="" placeholder="enter Number_Plate" class="text-name"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
+        <input id="numberPlate" onfocus="this.value=''"  onkeyup="lettersOnly(this)" value="" placeholder="enter Number_Plate" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
       </div>
     </div>
-    
+
+      <div class="row">
+        <div class="twelve columns">
+            <button class="button add">Add</button>
+      </div>
+
+      <div class="row">
+          <div class="four columns">
+              <h1> Town:</h1>
+          </div>
+          <div class="eighth columns">
+            <!--div id="myDropdown" class="dropdown-content">
+              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+              <a href="#capetown">About</a>
+              <a href="#paarl">Base</a>
+              <a href="#george">Blog</a>
+              <a href="#bellville">Contact</a>
+            </div-->
+        </div>
+      </div>
+      
+
+        <div class="row">
+          <div class="twelve columns">
+              <button class="button greet">Show</button>
+        </div>
+        <div class="row">
+          <div class="twelve columns">
+             <h1>Display Here</h1>
+          </div>
+      </div>
+    </div>
   </div>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<script src="js/registrationPlatesDom.js" charset="utf-8"></script>
+<script src="js/registrationPlates.js" charset="utf-8"></script>
+    <!--script>
+        function lettersOnly(input){
+            var regex = /[^a-z]/gi;
+            input.value = input.value.replace(regex, "");
+        }
+    </script-->
 </body>
 </html>
