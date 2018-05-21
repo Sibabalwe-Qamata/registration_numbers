@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var showBtn = document.querySelector(".show");
     var DisplayPlates = document.querySelector(".list-plates");
 
+    var showRegNum = document.getElementById("display");
+
    
 
     //Below to get the stored users from local storage
@@ -18,24 +20,21 @@ document.addEventListener('DOMContentLoaded', function () {
     function showNumberPlates() {
         
         let numPlate = regNumText.value;
-        var numPlateFormat = numPlate.toUpperCase(); 
+       
         var regNumbersToStore = document.createElement('regNumbersToStore');
-       // console.log(numPlate);
-        
         //Adding numberPlates dynamically
         if(numPlate.length > 0 && numPlate !== null)
         {
-            
+            var numPlateFormat = numPlate.toUpperCase(); 
 
             //To Display the registration numbers in the list
             var newDisplay = document.createElement("div"); 
+            newDisplay.classList.add('registrationNum');
             // and give it some content 
-            var newContent = document.createTextNode(numPlateFormat); 
 
-            console.log(newContent);
-            // add the text node to the newly created div
-            newDisplay.appendChild(newContent);  
-
+            newDisplay.textContent = numPlateFormat;
+            showRegNum.appendChild(newDisplay); 
+         
         }
 
 
