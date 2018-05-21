@@ -21,6 +21,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/registration_numbers.css">
+  <link rel="stylesheet" href="css/skeleton.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -39,12 +40,12 @@
     </div>
 
     <div class="row">
-      <div class="four columns" >
+      <div class="four columns" align="center" >
         <h4>Registration Number: </h4>
       </div>
 
       <div class="four columns" >
-        <input id="numberPlate" onfocus="this.value=''"  onkeyup="lettersOnly(this)" value="" placeholder="enter Number_Plate" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
+        <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter Number_Plate" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
       </div>
     </div>
 
@@ -74,8 +75,9 @@
               <button class="button greet">Show</button>
         </div>
         <div class="row">
-          <div class="twelve columns">
-             <h1>Display Here</h1>
+          <div class="twelve columns" align="center">
+             <h1>Registration Numbers Stored</h1>
+             <ul class"list-plates"></ul>
           </div>
       </div>
     </div>
