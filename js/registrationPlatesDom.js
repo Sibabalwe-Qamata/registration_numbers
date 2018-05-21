@@ -14,14 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //var namesToStore = greeting(storedUserList);
     //displayCounter.innerHTML = namesToStore.counter();
     var RegList = [];
-  
-
-
     function showNumberPlates() {
-        
         let numPlate = regNumText.value;
-       
-        var regNumbersToStore = document.createElement('regNumbersToStore');
         //Adding numberPlates dynamically
         if(numPlate.length > 0 && numPlate !== null)
         {
@@ -34,19 +28,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
             newDisplay.textContent = numPlateFormat;
             showRegNum.appendChild(newDisplay); 
-         
+
+            localStorage.setItem("RegistrationNumbers", JSON.stringify(numPlateFormat));
         }
-
-
-       
     }
 
-    /**showBtn.addEventListener('click', function () {
-        
-      
-    });**/
 
-    addBtn .addEventListener('click', function () {
-      showNumberPlates();
-    });
+    function filterTown(town){
+        for(var k =0; k < showRegNum.children.length; k++)
+        {
+            if(showRegNum.children[k].textContent.startsWith(town))
+            {
+                showRegNum.children[k].style.display = 'block';
+            }
+            else{
+                showRegNum.children[k].style.display = 'none'; 
+            }
+        }
+    }
+
+
+    function checkTown()
+    {
+        var checkedRadioBtn = document.querySelector("input[name='town']:checked");
+        if(checkedRadioBtn === "CapeTown")
+        {
+            filterTown("CY");
+
+        }
+        else if(checkedRadioBtn === "Paarl")
+        {
+            filterTown("CJ");
+        }
+        else if(checkedRadioBtn === "Worcester")
+        {
+            filterTown("CW");
+        }
+        else if(checkedRadioBtn === "All")
+        {
+            for(var p =0;p <showRegNum.children.length; p++)
+            {
+                showRegNum.children[p].style.display ="block";
+            }
+        } 
+    }
+
+addBtn.addEventListener('click', function () {
+    showNumberPlates();
+  });
+/**showBtn.addEventListener('click', function () {
+    checkTown(); 
+});**/
+
+
 });
