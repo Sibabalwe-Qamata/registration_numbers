@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
    
 
     //Below to get the stored users from local storage
-    //var storedUserList = localStorage.getItem('Name') ? JSON.parse(localStorage.getItem('Plate')) : {};
-    //var namesToStore = greeting(storedUserList);
-    //displayCounter.innerHTML = namesToStore.counter();
+    var storedRegList = localStorage.getItem('Plate') ? JSON.parse(localStorage.getItem('Plate')) : {};
+    var RegToStore = displayRegNumberPlates(storedRegList);
+
     var RegList = [];
     function showNumberPlates() {
         let numPlate = regNumText.value;
@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
             newDisplay.textContent = numPlateFormat;
             showRegNum.appendChild(newDisplay); 
 
-            localStorage.setItem("RegistrationNumbers", JSON.stringify(numPlateFormat));
+            //To Factory Function ----->>> LocalStorage
+            var toStorage = RegToStore.setRegPlate(numPlateFormat);
+
+            localStorage.setItem("Plate", JSON.stringify(numPlateFormat));
         }
     }
 
