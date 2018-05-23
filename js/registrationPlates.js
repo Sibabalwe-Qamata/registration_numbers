@@ -1,4 +1,4 @@
-function numberPlates(numbStored)
+function numberPlates()
 {
 
 

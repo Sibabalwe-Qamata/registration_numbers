@@ -4,4 +4,4 @@ describe('The Registration Number Plates function', function()
     function() {
       var numbers = numberPlates({});
      });
-});
+  });
