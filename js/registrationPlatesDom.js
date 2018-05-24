@@ -13,28 +13,36 @@ document.addEventListener('DOMContentLoaded', function () {
     var storedRegList = localStorage.getItem('Plate') ? JSON.parse(localStorage.getItem('Plate')) : {};
     var RegToStore = displayRegNumberPlates(storedRegList);
 
-    var RegList = [];
-    function showNumberPlates() {
-        let numPlate = regNumText.value;
-        //Adding numberPlates dynamically
-        if(numPlate.length > 0 && numPlate !== null)
-        {
-            var numPlateFormat = numPlate.toUpperCase(); 
+        var RegList = [];
+         function showNumberPlates()
+         {
+           
+           let numPlate = regNumText.value;
 
-            //To Display the registration numbers in the list
-            var newDisplay = document.createElement("div"); 
-            newDisplay.classList.add('registrationNum');
-            // and give it some content 
+           
+          
+           var regNumbersToStore = document.createElement('regNumbersToStore');
+             //Adding numberPlates dynamically
+             if(numPlate.length > 0 && numPlate !== null)
+             {
+                var numPlateFormat = numPlate.toUpperCase(); 
+                RegToStore.enterRegPlate(numPlateFormat);
+                //To Display the registration numbers in the list
+                    var newDisplay = document.createElement("div"); 
+                    newDisplay.classList.add('registrationNum');
 
-            newDisplay.textContent = numPlateFormat;
-            showRegNum.appendChild(newDisplay); 
+                 newDisplay.textContent = RegToStore.getPlate();
+                 showRegNum.appendChild(newDisplay); 
 
-            //To Factory Function ----->>> LocalStorage
-            var toStorage = RegToStore.setRegPlate(numPlateFormat);
+                 var newMapList = RegToStore.getMap();
+               localStorage.setItem("RegistrationNumbers", JSON.stringify(newMapList));
 
-            localStorage.setItem("Plate", JSON.stringify(numPlateFormat));
+             
+            }
+            console.log(RegToStore.counter());
+        
         }
-    }
+
 
 
     function filterTown(town){
@@ -56,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var checkedRadioBtn = document.querySelector("input[name='town']:checked");
         if(checkedRadioBtn === "CapeTown")
         {
-            filterTown("CY");
+            filterTown("CA");
 
         }
         else if(checkedRadioBtn === "Paarl")

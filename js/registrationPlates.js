@@ -1,12 +1,13 @@
 function displayRegNumberPlates(NumberPlateDatabase) 
 {
 
-    var numberPlateDisplay = '';
+   var numberPlateDisplay = '';
     var town = '';
     var plateStored = NumberPlateDatabase || [];
 
 
-    function setRegPlate(numPlate) {
+    function setRegPlate(numPlate) 
+    {
         if (numPlate !== " ") {
             numberPlateDisplay = numPlate;
         }
@@ -26,6 +27,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
     function formatRegPlate(word) 
     {
         
+
     }
     
 
@@ -39,35 +41,25 @@ function displayRegNumberPlates(NumberPlateDatabase)
     //Below are Getter functions
 
     function getRegPlate() {
-        return Name_to_greet;
+        return numberPlateDisplay;
     }
 
-
-
-    function getLanguageChoice() {
-        return language;
-    }
-
-    function getNameMap() {
-        return namesGreeted;
+    function getLocationMap() {
+        return plateStored;
     }
 
     function getCounter() {
-        return Object.keys(namesGreeted).length;
+        return Object.keys(plateStored);
     }
     
     
-     return {
-        set_Name: setName,
-        set_language: setLanguage,
-        capitilize: CapitilizeString,
+    return {
+        enterRegPlate: setRegPlate,
+        set_language: setTownLocation,
 
-
-        get_name: getNameToGreet,
-        get_language: getLanguageChoice,
-        get_NameList: getNameMap, 
-        doGreet: greetUser,
+        getPlate: getRegPlate,
+        getMap: getLocationMap,
         counter: getCounter
-    }
+     }
 
 }

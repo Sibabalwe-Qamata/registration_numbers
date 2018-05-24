@@ -15,8 +15,7 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
+  
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
@@ -44,7 +43,7 @@
       </div>
 
       <div class="four columns" >
-        <input id="numberPlate" onfocus="this.value=''"  onkeyup="lettersOnly(this)" value="" placeholder="enter Number_Plate" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
+        <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter Number_Plate" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
       </div>
     </div>
 
@@ -54,28 +53,44 @@
       </div>
 
       <div class="row">
-          <div class="four columns">
-              <h1> Town:</h1>
-          </div>
-          <div class="eighth columns">
-            <!--div id="myDropdown" class="dropdown-content">
-              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-              <a href="#capetown">About</a>
-              <a href="#paarl">Base</a>
-              <a href="#george">Blog</a>
-              <a href="#bellville">Contact</a>
-            </div-->
+        <div class="three columns">
+            <label class="">
+            <input type="radio" name="town" class="CapeTownTypeRadio" value="CapeTown">
+            <span class="label-body">Cape Town</span>
+        </label>
         </div>
-      </div>
-      
 
+
+        <div class="three columns">
+            <label class="">
+            <input type="radio" name="town" class="WorcesterTypeRadio" value="Bellville">
+            <span class="label-body">Bellville</span>
+        </label>
+        </div>
+
+
+        <div class="three columns">
+          <label class="">
+          <input type="radio" name="town" class="WorcesterTypeRadio" value="Worcester">
+          <span class="label-body">Worcester</span>
+      </label>
+      </div>
+
+        <div class="three columns">
+            <label class="">
+            <input type="radio" name="town" class="AllTypeRadio" value="All">
+            <span class="label-body">All</span>
+        </label>
+        </div>
+    </div>
         <div class="row">
           <div class="twelve columns">
               <button class="button show">Show</button>
         </div>
         <div class="row">
-          <div class="twelve columns displayPlates">
-             <h1>Display Here</h1>
+          <div class="twelve columns" align="center">
+             <ul class"list-plates" id="display">
+             </ul>
           </div>
       </div>
     </div>
@@ -86,11 +101,6 @@
 
 <script src="js/registrationPlatesDom.js" charset="utf-8"></script>
 <script src="js/registrationPlates.js" charset="utf-8"></script>
-    <!--script>
-        function lettersOnly(input){
-            var regex = /[^a-z]/gi;
-            input.value = input.value.replace(regex, "");
-        }
-    </script-->
+
 </body>
 </html>
