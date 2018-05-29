@@ -78,7 +78,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
    
     return {
         enterRegPlate: setRegPlate,
-        set_language: setTownLocation,
+        set_town: setTownLocation,
 
         getPlate: getRegPlate,
         getMap: getLocationMap,
