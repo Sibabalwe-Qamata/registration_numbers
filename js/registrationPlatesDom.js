@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () 
+{
 
     var regNumText = document.querySelector(".regNumber");
     var addBtn = document.querySelector(".add");
@@ -13,39 +14,54 @@ document.addEventListener('DOMContentLoaded', function () {
     var storedRegList = localStorage.getItem('Plate') ? JSON.parse(localStorage.getItem('Plate')) : {};
     var RegToStore = displayRegNumberPlates(storedRegList);
 
-        var RegList = [];
-         function showNumberPlates()
-         {
-           
-           let numPlate = regNumText.value;
+    
 
-           
-          
-           var regNumbersToStore = document.createElement('regNumbersToStore');
-             //Adding numberPlates dynamically
-             if(numPlate.length > 0 && numPlate !== null)
-             {
-                var numPlateFormat = numPlate.toUpperCase(); 
-                RegToStore.enterRegPlate(numPlateFormat);
-                //To Display the registration numbers in the list
-                    var newDisplay = document.createElement("div"); 
-                    newDisplay.classList.add('registrationNum');
+    function showNumberPlates(regNumbers) {
+       
+        //Adding numberPlates dynamically
+        var newDisplay = document.createElement("div"); 
+        newDisplay.classList.add('registrationNum');
 
-                 newDisplay.textContent = RegToStore.getPlate();
-                 showRegNum.appendChild(newDisplay); 
+        newDisplay.textContent = regNumbers;
+        showRegNum.appendChild(newDisplay); 
 
-                 var newMapList = RegToStore.getMap();
-               localStorage.setItem("RegistrationNumbers", JSON.stringify(newMapList));
+    }
 
+     function addNumberPLate(){
+
+             let numPlate = regNumText.value;
+             regNumText.value = "";
+
+            
              
-            }
-            console.log(RegToStore.counter());
-        
-        }
+             let verifyPlate = RegToStore.getMap();
+             let lastInputPlate;
+             
+         
+             if(Object.keys(verifyPlate).length === 0)
+             { lastInputPlate = ""}else { lastInputPlate = Object.keys(verifyPlate)[Object.keys(verifyPlate).length -1]};
+
+             if(numPlate !== lastInputPlate)
+             {
+                var numPlateFormat = numPlate.toUpperCase();
+                if(numPlateFormat)
+                {
+                    RegToStore.enterRegPlate(numPlateFormat); 
+                    
+                    let getRegPlate = RegToStore.getMap();
+
+                    let lastOne = Object.keys(getRegPlate)[Object.keys(getRegPlate).length -1];
+                    showNumberPlates(lastOne);
+                
+                    localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
+                }
+
+             }
+
+     }
 
 
-
-    function filterTown(town){
+    function filterByTown(town){
         for(var k =0; k < showRegNum.children.length; k++)
         {
             if(showRegNum.children[k].textContent.startsWith(town))
@@ -59,37 +75,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function checkTown()
-    {
-        var checkedRadioBtn = document.querySelector("input[name='town']:checked");
-        if(checkedRadioBtn === "CapeTown")
-        {
-            filterTown("CA");
 
-        }
-        else if(checkedRadioBtn === "Paarl")
-        {
-            filterTown("CJ");
-        }
-        else if(checkedRadioBtn === "Worcester")
-        {
-            filterTown("CW");
-        }
-        else if(checkedRadioBtn === "All")
-        {
-            for(var p =0;p <showRegNum.children.length; p++)
-            {
-                showRegNum.children[p].style.display ="block";
-            }
-        } 
+    function checkLocation() 
+    {
+        let RegList = RegToStore.PlateList();
+
+        let location =  document.querySelector("input[name='town']:checked"); 
+        let selectedTown = RegToStore.filterTown(location.value);
+
+        Object.keys(selectedTown).map( regPlate => {showNumberPlates(regPlate);})
+        
     }
 
+ showBtn.addEventListener('click', function () {
+        checkLocation();
+      });  
 addBtn.addEventListener('click', function () {
-    showNumberPlates();
+    addNumberPLate();
   });
-/**showBtn.addEventListener('click', function () {
-    checkTown(); 
-});**/
 
-
+  
 });

@@ -24,17 +24,39 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
 
     // To-DO:  a function to add space to the registration plate numbers format the registration plate
-    function formatRegPlate(word) 
+    function filterRegPlate(TownChoice) 
     {
-        
+        let townSelected = {};
+        let locationIndicator = '';
 
+        if(TownChoice ==="CapeTown"){
+            locationIndicator ='CA';
+        }
+        else if(TownChoice === "Paarl"){
+            locationIndicator = 'CJ';
+        }
+        else if(TownChoice === "Worcester"){
+            locationIndicator = 'CW';
+        }
+        else if(TownChoice ==="All"){
+            return plateStored;
+        }
+
+       let PlateStoredList =  Object.keys(plateStored);
+
+       for(var i = 0; i <PlateStoredList.length; i++)
+       {
+            if(PlateStoredList[i].startsWith(locationIndicator))
+            {
+                townSelected[i]=0
+            }
+       }
+       return townSelected;
     }
     
 
     //To-Do: a function to check it the number plate starts with "C" or end with "WP" and return true or false
-    function checkLocation() {
-      
-    }
+
 
     //To-Do: a filter function to filter the 
 
@@ -48,18 +70,21 @@ function displayRegNumberPlates(NumberPlateDatabase)
         return plateStored;
     }
 
-    function getCounter() {
+    function getPlateList() {
+        //let PlateArray= ;
         return Object.keys(plateStored);
     }
-    
-    
+
+   
     return {
         enterRegPlate: setRegPlate,
         set_language: setTownLocation,
 
         getPlate: getRegPlate,
         getMap: getLocationMap,
-        counter: getCounter
+        PlateList: getPlateList,
+
+        filterTown:filterRegPlate
      }
 
 }

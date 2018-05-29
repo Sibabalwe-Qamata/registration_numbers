@@ -15,11 +15,13 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/registration_numbers.css">
+  <link rel="stylesheet" href="css/skeleton.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -38,12 +40,8 @@
     </div>
 
     <div class="row">
-      <div class="four columns" >
-        <h4>Registration Number: </h4>
-      </div>
-
-      <div class="four columns" >
-        <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter Number_Plate" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
+      <div class="twelve columns" >
+        <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumber"  pattern="[a-zA-Z]+" title="Please enter a Number Plate e.g 'CA31004'">
       </div>
     </div>
 
@@ -51,7 +49,12 @@
         <div class="twelve columns">
             <button class="button add">Add</button>
       </div>
+      <div class="row">
+        <div class="twelve columns">
+           <p>Please select a town below, and press the show button.</p>
+      </div>
 
+      </div>
       <div class="row">
         <div class="three columns">
             <label class="">
@@ -63,25 +66,24 @@
 
         <div class="three columns">
             <label class="">
-            <input type="radio" name="town" class="WorcesterTypeRadio" value="Bellville">
-            <span class="label-body">Bellville</span>
+            <input type="radio" name="town" class="PaarlTypeRadio" value="Paarl">
+            <span class="label-body">Paarl</span>
         </label>
         </div>
-
-
-        <div class="three columns">
-          <label class="">
-          <input type="radio" name="town" class="WorcesterTypeRadio" value="Worcester">
-          <span class="label-body">Worcester</span>
-      </label>
-      </div>
 
         <div class="three columns">
             <label class="">
-            <input type="radio" name="town" class="AllTypeRadio" value="All">
-            <span class="label-body">All</span>
+            <input type="radio" name="town" class="WorcesterTypeRadio" value="Worcester">
+            <span class="label-body">Worcester</span>
         </label>
         </div>
+
+        <div class="three columns">
+          <label class="">
+          <input type="radio" name="town" class="AllTypeRadio" value="All">
+          <span class="label-body">All</span>
+      </label>
+      </div>
     </div>
         <div class="row">
           <div class="twelve columns">
@@ -98,9 +100,8 @@
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-<script src="js/registrationPlatesDom.js" charset="utf-8"></script>
 <script src="js/registrationPlates.js" charset="utf-8"></script>
+<script src="js/registrationPlatesDom.js" charset="utf-8"></script>
 
 </body>
 </html>
