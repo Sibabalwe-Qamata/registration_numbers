@@ -1,9 +1,9 @@
 function displayRegNumberPlates(NumberPlateDatabase) 
 {
 
-   var numberPlateDisplay = '';
+    var numberPlateDisplay = '';
     var town = '';
-    var plateStored = NumberPlateDatabase || [];
+    var plateStored = NumberPlateDatabase || {};
 
 
     function setRegPlate(numPlate) 

@@ -92,6 +92,21 @@ span{
     box-sizing: border-box;
   }
   
+  .userErrors{
+    background-color:white;
+    background-position: 30px 30px;
+    border: 2px solid black;
+    border-radius: 20%;
+    font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 5px;
+    padding: 12px 20px 12px 40px;
+    text-align: center;
+    width: 100%;
+    color : red;
+    font-size: 85%;
+
+  }
 
   
 

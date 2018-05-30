@@ -8,26 +8,60 @@ document.addEventListener('DOMContentLoaded', function ()
 
     var showRegNum = document.getElementById("display");
 
+    var showUserError = document.getElementById("errors");
+
    
 
     //Below to get the stored users from local storage
     var storedRegList = localStorage.getItem('Plate') ? JSON.parse(localStorage.getItem('Plate')) : {};
     var RegToStore = displayRegNumberPlates(storedRegList);
 
-    
 
-    function showNumberPlates(regNumbers) {
-       
-        //Adding numberPlates dynamically
-        var newDisplay = document.createElement("div"); 
-        newDisplay.classList.add('registrationNum');
+    //To-Do:   Add Verify function here
 
-        newDisplay.textContent = regNumbers;
-        showRegNum.appendChild(newDisplay); 
+    function verifyInput()
+    {
+        //Regex Function 
+
+
+
+
 
     }
 
-     function addNumberPLate(){
+    function showNumberPlates(regNumbers) 
+    {
+        if(regNumbers !== null){
+            var newDisplay = document.createElement("div"); 
+            newDisplay.classList.add('registrationNum');
+    
+            newDisplay.textContent = regNumbers;
+            showRegNum.appendChild(newDisplay);
+
+            //Insert Before here ...
+        }
+       
+
+    }
+
+    function errorsDisplay()
+    {
+        var errorMsg = document.createElement("div"); 
+        errorMsg.classList.add('userErrors');
+
+        errorMsg.textContent = "Error Input! Please enter a Western Cape Registration Number Plate and the press the Add button!";
+        showUserError.appendChild(errorMsg);
+    }
+
+   /** function removeElements()
+    {
+        showRegNum.removeChild(element.firstChild);
+
+    }**/
+
+
+     function addNumberPLate()
+     {
 
              let numPlate = regNumText.value;
              regNumText.value = "";
@@ -41,7 +75,11 @@ document.addEventListener('DOMContentLoaded', function ()
              if(Object.keys(verifyPlate).length === 0)
              { lastInputPlate = ""}else { lastInputPlate = Object.keys(verifyPlate)[Object.keys(verifyPlate).length -1]};
 
-             if(numPlate !== lastInputPlate)
+            if(numPlate === "" || numPlate.length > 10 ){
+                errorsDisplay();
+            }
+
+             if((numPlate !== lastInputPlate))
              {
                 var numPlateFormat = numPlate.toUpperCase();
                 if(numPlateFormat)
@@ -55,23 +93,14 @@ document.addEventListener('DOMContentLoaded', function ()
                 
                     localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
                 }
-
              }
 
      }
 
 
-    function filterByTown(town){
-        for(var k =0; k < showRegNum.children.length; k++)
-        {
-            if(showRegNum.children[k].textContent.startsWith(town))
-            {
-                showRegNum.children[k].style.display = 'block';
-            }
-            else{
-                showRegNum.children[k].style.display = 'none'; 
-            }
-        }
+    function filterByTown(town)
+    {
+      let CPT_plates = ['CA ', 'CJ ', ' CW ', 'CAW', 'CAR', 'CEO', 'CFM' ];
     }
 
 
@@ -81,10 +110,15 @@ document.addEventListener('DOMContentLoaded', function ()
         let RegList = RegToStore.PlateList();
 
         let location =  document.querySelector("input[name='town']:checked"); 
-        let selectedTown = RegToStore.filterTown(location.value);
 
-        Object.keys(selectedTown).map( regPlate => {showNumberPlates(regPlate);})
-        
+        if (location !== null){
+            let selectedTown = RegToStore.filterTown(location.value);
+            Object.keys(selectedTown).map( regPlate => {showNumberPlates(regPlate);})
+        }
+        else{
+            errorsDisplay();
+        }
+ 
     }
 
  showBtn.addEventListener('click', function () {
