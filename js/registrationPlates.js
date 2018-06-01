@@ -5,6 +5,8 @@ function displayRegNumberPlates(NumberPlateDatabase)
     var town = '';
     var plateStored = NumberPlateDatabase || {};
 
+    let PlateStoredList;
+
 
     function setRegPlate(numPlate) 
     {
@@ -22,12 +24,23 @@ function displayRegNumberPlates(NumberPlateDatabase)
         town = location;
     }
 
+    //Below has to take the array from localStorage
+    function filterTownStored(arrayStored)
+    {
+        PlateStoredList = arrayStored;
+        return PlateStoredList;
+
+    }
 
     // To-DO:  a function to add space to the registration plate numbers format the registration plate
     function filterRegPlate(TownChoice) 
     {
-        let townSelected = {};
+        
         let locationIndicator = '';
+
+        var townSelected = [];
+        var countTown = 0;
+        var holdPlate = '';
 
         if(TownChoice ==="CapeTown"){
             locationIndicator ='CA';
@@ -39,16 +52,17 @@ function displayRegNumberPlates(NumberPlateDatabase)
             locationIndicator = 'CW';
         }
         else if(TownChoice ==="All"){
-            return plateStored;
+            return PlateStoredList;
         }
 
-       let PlateStoredList =  Object.keys(plateStored);
+      
 
        for(var i = 0; i <PlateStoredList.length; i++)
        {
+           
             if(PlateStoredList[i].startsWith(locationIndicator))
             {
-                townSelected[i]=0
+                townSelected[countTown]=PlateStoredList[i];
             }
        }
        return townSelected;
@@ -58,8 +72,26 @@ function displayRegNumberPlates(NumberPlateDatabase)
     //To-Do: a function to check it the number plate starts with "C" or end with "WP" and return true or false
 
 
-    //To-Do: a filter function to filter the 
+    //To-Do: a filter function
 
+    function filteredTowns(location)
+    {
+        var filterLocation = [];
+        var countTown = 0;
+        var holdPlate = '';
+        var storeTown = Object.keys(plateStored);
+
+        for(let i=0; i<storeTown.length;i++){
+           holdPlate = storeTown[i].slice(0,3);
+           holdPlate = holdPlate.trim();
+           if(holdPlate === location){
+  
+              filterLocation[countTown] = storeTown[i];
+              countTown ++;
+           }
+        }
+        return filterLocation;
+    }
     //Below are Getter functions
 
     function getRegPlate() {
@@ -82,9 +114,11 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
         getPlate: getRegPlate,
         getMap: getLocationMap,
+        getPlatesStored: filterTownStored,
         PlateList: getPlateList,
 
-        filterTown:filterRegPlate
+        filterTown:filterRegPlate,
+        townsSelected: filteredTowns
      }
 
 }
