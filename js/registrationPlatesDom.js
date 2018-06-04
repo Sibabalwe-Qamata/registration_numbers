@@ -22,10 +22,12 @@ document.addEventListener('DOMContentLoaded', function ()
 
 
     //To-Do:   Add Verify function here
-
-    function verifyInput()
+    function verifyInput(getRegNum)
     {
         //Regex Function 
+        if(getRegNum.length < 10){
+            console.log("Valid Registration");
+        }
     }
 
    
@@ -61,17 +63,34 @@ document.addEventListener('DOMContentLoaded', function ()
         showUserError.appendChild(errorMsg);
     }
     
+    function checkDuplicate(regPlate){
+        var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+        var arrayValueStores = Object.keys(valueStored);
+        RegToStore.getPlatesStored(arrayValueStores);
+
+
+        const containsPlate = arrayValueStores.some( element => element === numPlateFormat);
+        if(containsPlate === true)
+        {
+            errorsDisplayDuplicates()
+            while (showUserError.firstChild) {
+                showUserError.removeChild(showUserError.firstChild);
+            }
+
+        }
+    }
 
      function addNumberPLate()
      {
-
              var numPlate = regNumText.value;
+             console.log(typeof(numPlate));
              regNumText.value = "";
 
              var verifyPlate = RegToStore.getMap();
              if(numPlate !== '')
              {
                 var numPlateFormat = numPlate.toUpperCase();
+                
                 if(numPlateFormat)
                 {
                     RegToStore.enterRegPlate(numPlateFormat); 
@@ -97,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function ()
              var newText = document.createTextNode(regNumbers);
             
             newDisplay.appendChild(newText);
-             //Insert Before here ...
             showRegNum.insertBefore(newDisplay, showRegNum.childNodes[0]);
          }
      }
@@ -106,13 +124,11 @@ document.addEventListener('DOMContentLoaded', function ()
     {
         var locationIndicator =  document.querySelector("input[name='town']:checked").value; 
 
-        var CapeT =[];
-        var Paarl_List = [];
-        var Worcester = [];
-        var allTowns = [];
+            var CapeT =[];
+            var Paarl_List = [];
+            var Worcester = [];
+            var allTowns = [];
 
-       
-            
             while (showRegNum.firstChild) {
             showRegNum.removeChild(showRegNum.firstChild);
             }
@@ -138,12 +154,7 @@ document.addEventListener('DOMContentLoaded', function ()
                     Worcester.push(arrayValueStores[k]);
                 }
                 allTowns.push(arrayValueStores[k]);
-            }
-            console.log("Cape Town: ", CapeT);
-            console.log("All", allTowns);
-            console.log("Worcester: ", Worcester)
-            console.log("Paarl: ", Paarl_List);
-           
+            }   
             if(locationIndicator === "CapeTown")
             {
                 if(CapeT.length === 0){
@@ -196,15 +207,11 @@ document.addEventListener('DOMContentLoaded', function ()
        
     }
 
-
-
   window.addEventListener("load", function()
   {
     var PlatesValueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-
     if(PlatesValueStored !== undefined && PlatesValueStored !== null){
-        var arrayValues = Object.keys(PlatesValueStored); // It throws an array if nothing is added on local storage
-    
+        var arrayValues = Object.keys(PlatesValueStored); 
         for(var p =0; p < arrayValues.length; p++)
         {
             showNumberPlates(arrayValues[p]);

@@ -71,27 +71,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
     //To-Do: a function to check it the number plate starts with "C" or end with "WP" and return true or false
 
-
-    //To-Do: a filter function
-
-    function filteredTowns(location)
-    {
-        var filterLocation = [];
-        var countTown = 0;
-        var holdPlate = '';
-        var storeTown = Object.keys(plateStored);
-
-        for(var i=0; i<storeTown.length;i++){
-           holdPlate = storeTown[i].slice(0,3);
-           holdPlate = holdPlate.trim();
-           if(holdPlate === location){
-  
-              filterLocation[countTown] = storeTown[i];
-              countTown ++;
-           }
-        }
-        return filterLocation;
-    }
+   
     //Below are Getter functions
 
     function getRegPlate() {
@@ -117,8 +97,8 @@ function displayRegNumberPlates(NumberPlateDatabase)
         getPlatesStored: filterTownStored,
         PlateList: getPlateList,
 
-        filterTown:filterRegPlate,
-        townsSelected: filteredTowns
+        filterTown:filterRegPlate
+      
      }
 
 }
