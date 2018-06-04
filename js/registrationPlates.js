@@ -5,7 +5,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
     var town = '';
     var plateStored = NumberPlateDatabase || {};
 
-    let PlateStoredList;
+    var PlateStoredList;
 
 
     function setRegPlate(numPlate) 
@@ -36,7 +36,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
     function filterRegPlate(TownChoice) 
     {
         
-        let locationIndicator = '';
+        var locationIndicator = '';
 
         var townSelected = [];
         var countTown = 0;
@@ -81,7 +81,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
         var holdPlate = '';
         var storeTown = Object.keys(plateStored);
 
-        for(let i=0; i<storeTown.length;i++){
+        for(var i=0; i<storeTown.length;i++){
            holdPlate = storeTown[i].slice(0,3);
            holdPlate = holdPlate.trim();
            if(holdPlate === location){
