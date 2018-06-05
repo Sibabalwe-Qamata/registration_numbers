@@ -7,6 +7,11 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
     var PlateStoredList;
 
+    var CapeT =[];
+    var Paarl_List = [];
+    var Worcester = [];
+    var allTowns = [];
+
 
     function setRegPlate(numPlate) 
     {
@@ -28,69 +33,58 @@ function displayRegNumberPlates(NumberPlateDatabase)
     function filterTownStored(arrayStored)
     {
         PlateStoredList = arrayStored;
-        return PlateStoredList;
-
+        //return PlateStoredList;
     }
 
+    function getPlateStoredLocalStorage(){
+        return PlateStoredList;
+    }
     // To-DO:  a function to add space to the registration plate numbers format the registration plate
-    function filterRegPlate(TownChoice) 
+    function filterRegPlate(PlateStored, place) 
     {
-        
-        var locationIndicator = '';
-
-        var townSelected = [];
-        var countTown = 0;
-        var holdPlate = '';
-
-        if(TownChoice ==="CapeTown"){
-            locationIndicator ='CA';
-        }
-        else if(TownChoice === "Paarl"){
-            locationIndicator = 'CJ';
-        }
-        else if(TownChoice === "Worcester"){
-            locationIndicator = 'CW';
-        }
-        else if(TownChoice ==="All"){
-            return PlateStoredList;
-        }
-
-      
-
-       for(var i = 0; i <PlateStoredList.length; i++)
-       {
-           
-            if(PlateStoredList[i].startsWith(locationIndicator))
+        for(var k =0; k < PlateStored.length; k++)
+        {
+            if(PlateStored[k].startsWith("CA ") === true && place === "CapeTown")
             {
-                townSelected[countTown]=PlateStoredList[i];
+                CapeT.push(PlateStored[k]);
             }
-       }
-       return townSelected;
+            else if(PlateStored[k].startsWith("CJ ") === true && place ==="Paarl")
+            {
+                Paarl_List.push(PlateStored[k]);
+            }
+            else if(PlateStored[k].startsWith("CW ") === true && place ==="Worcester"){
+                Worcester.push(PlateStored[k]);
+            }
+            else if(place === "All"){
+                allTowns.push(PlateStored[k]);
+            }
+            
+        }
     }
     
+    function verifyPlatefromCape(list)
+    {
+        for(var v= 0 ; v < list.length; v++){
+
+        }
+    }
 
     //To-Do: a function to check it the number plate starts with "C" or end with "WP" and return true or false
 
+    function getCapeTown(){
+        return CapeT;
+    }
 
-    //To-Do: a filter function
+    function getPaarl(){
+        return Paarl_List;
+    }
 
-    function filteredTowns(location)
-    {
-        var filterLocation = [];
-        var countTown = 0;
-        var holdPlate = '';
-        var storeTown = Object.keys(plateStored);
-
-        for(var i=0; i<storeTown.length;i++){
-           holdPlate = storeTown[i].slice(0,3);
-           holdPlate = holdPlate.trim();
-           if(holdPlate === location){
-  
-              filterLocation[countTown] = storeTown[i];
-              countTown ++;
-           }
-        }
-        return filterLocation;
+    function getWorcester(){
+        return Worcester;
+    }
+   
+    function getAll(){
+        return allTowns;
     }
     //Below are Getter functions
 
@@ -118,7 +112,12 @@ function displayRegNumberPlates(NumberPlateDatabase)
         PlateList: getPlateList,
 
         filterTown:filterRegPlate,
-        townsSelected: filteredTowns
+        getPaarlList: getPaarl,
+        getCapeTownList: getCapeTown,
+        getWorcesterList: getWorcester,
+        all: getAll, 
+        getStoredPlate : getPlateStoredLocalStorage
+      
      }
 
 }

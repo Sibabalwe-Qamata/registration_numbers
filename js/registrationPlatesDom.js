@@ -22,10 +22,12 @@ document.addEventListener('DOMContentLoaded', function ()
 
 
     //To-Do:   Add Verify function here
-
-    function verifyInput()
+    function verifyInput(getRegNum)
     {
         //Regex Function 
+        if(getRegNum.length < 10){
+            console.log("Valid Registration");
+        }
     }
 
    
@@ -38,11 +40,11 @@ document.addEventListener('DOMContentLoaded', function ()
         showUserError.appendChild(errorMsg);
     }
 
-   /** function removeElements()
+    function removeElements()
     {
         showRegNum.removeChild(element.firstChild);
 
-    }**/
+    }
     function errorsDisplayDuplicates()
     {
         var errorMsg = document.createElement("div"); 
@@ -52,35 +54,43 @@ document.addEventListener('DOMContentLoaded', function ()
         showUserError.appendChild(errorMsg);
     }
 
+    function errorsDisplayUponFilter()
+    {
+        var errorMsg = document.createElement("div"); 
+        errorMsg.classList.add('userErrors');
+
+        errorMsg.textContent = "Oops town Selected is not in the list!";
+        showUserError.appendChild(errorMsg);
+    }
+    
+    function checkDuplicate(regPlate){
+        var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+        var arrayValueStores = Object.keys(valueStored);
+        RegToStore.getPlatesStored(arrayValueStores);
+
+
+        const containsPlate = arrayValueStores.some( element => element === numPlateFormat);
+        if(containsPlate === true)
+        {
+            errorsDisplayDuplicates()
+            while (showUserError.firstChild) {
+                showUserError.removeChild(showUserError.firstChild);
+            }
+
+        }
+    }
 
      function addNumberPLate()
      {
-
              var numPlate = regNumText.value;
+             console.log(typeof(numPlate));
              regNumText.value = "";
 
              var verifyPlate = RegToStore.getMap();
-             //var lastInputPlate;
-             
-         
-             /**if(Object.keys(verifyPlate).length === 0)
-             { lastInputPlate = ""}
-             else 
-             { lastInputPlate = Object.keys(verifyPlate)[Object.keys(verifyPlate).length -1]};
-
-            if(numPlate === "" || numPlate.length > 10 ){
-                errorsDisplay(); // This need to go the Input error function
-            }
-
-            lastInputPlate = Object.keys(verifyPlate)[Object.keys(verifyPlate).length -1];
-            if(numPlate === lastInputPlate)
-            {
-                errorsDisplayDuplicates();
-            }**/
-
              if(numPlate !== '')
              {
                 var numPlateFormat = numPlate.toUpperCase();
+                
                 if(numPlateFormat)
                 {
                     RegToStore.enterRegPlate(numPlateFormat); 
@@ -103,40 +113,34 @@ document.addEventListener('DOMContentLoaded', function ()
          {
              var newDisplay = document.createElement("div"); 
              newDisplay.classList.add('registrationNum');
-     
-             newDisplay.textContent = regNumbers;
+             var newText = document.createTextNode(regNumbers);
             
-            showRegNum.appendChild(newDisplay);
-             //Insert Before here ...
-              //showRegNumParent.insertBefore(newDisplay, theFirstChild);
+            newDisplay.appendChild(newText);
+            showRegNum.insertBefore(newDisplay, showRegNum.childNodes[0]);
          }
      }
- 
-
-
-    function filterByTown(town)
-    {
-    //  let CPT_plates = ['CA ', 'CJ ', ' CW ', 'CAW', 'CAR', 'CEO', 'CFM' ];
-    }
-
-
 
     function checkLocation() 
     {
         var locationIndicator =  document.querySelector("input[name='town']:checked").value; 
 
-        var CapeT =[];
-        var Paarl_List = [];
-        var Worcester = [];
-        var allTowns = [];
+           // var CapeT =[];
+           // var Paarl_List = [];
+           // var Worcester = [];
+           // var allTowns = [];
 
-        if (locationIndicator !== null){
+            while (showRegNum.firstChild) {
+            showRegNum.removeChild(showRegNum.firstChild);
+            }
+
+            if (locationIndicator !== null)
+            {
             var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
             var arrayValueStores = Object.keys(valueStored);
             RegToStore.getPlatesStored(arrayValueStores);
 
           
-            for(var k =0; k < arrayValueStores.length; k++)
+            /**for(var k =0; k < arrayValueStores.length; k++)
             {
                 if(arrayValueStores[k].startsWith("CA ") === true)
                 {
@@ -149,38 +153,78 @@ document.addEventListener('DOMContentLoaded', function ()
                 else if(arrayValueStores[k].startsWith("CW ") === true){
                     Worcester.push(arrayValueStores[k]);
                 }
-                allTowns[arrayValueStores[k]];
+                allTowns.push(arrayValueStores[k]);
+            }  **/ 
+            RegToStore.filterTown(arrayValueStores, locationIndicator);
+            if(locationIndicator === "CapeTown")
+            {
+                var forCape = RegToStore.getCapeTownList();
+                console.log(forCape);
+                if(forCape.length === 0){
+                    errorsDisplayUponFilter();
+                }
+                else{
+                    while (showUserError.firstChild) {
+                        showUserError.removeChild(showUserError.firstChild);
+                        }
+                for(var z =0 ; z <forCape.length; z++){ showNumberPlates(forCape[z])}
+                }
+               
             }
-            console.log("Cape Town: ", CapeT);
-            console.log("Paarl", Paarl_List);
-            //console.log("Worcester", Worcester);
-            var selectedTown = RegToStore.filterTown(locationIndicator);
-            console.log(selectedTown);
-
-            //showNumberPlates(selectedTown);
+            if(locationIndicator === "Paarl")
+            {
+                var forPaarl = RegToStore.getPaarlList();
+                if(forPaarl.length === 0){
+                    errorsDisplayUponFilter();
+                }else{
+                    while (showUserError.firstChild) {
+                        showUserError.removeChild(showUserError.firstChild);
+                        }
+                for(var p =0 ; p <forPaarl.length; p++){ showNumberPlates(forPaarl[p])}}
+              
+            }
+            if(locationIndicator === "Worcester")
+            {
+                var forWorcester = RegToStore.getWorcesterList();
+                if(forWorcester.length === 0){
+                    errorsDisplayUponFilter();
+                }
+                else{
+                    while (showUserError.firstChild) {
+                        showUserError.removeChild(showUserError.firstChild);
+                        }
+                for(var w =0 ; w <forWorcester.length; w++){ showNumberPlates(forWorcester[w])}
+                }
+            }
+            if(locationIndicator === "All"){
+                var forAll = RegToStore.all(); 
+                if(forAll.length === 0){
+                    errorsDisplayUponFilter();
+                }
+                else{
+                    while (showUserError.firstChild) {
+                        showUserError.removeChild(showUserError.firstChild);
+                        }
+                    for(var a =0 ; a <arrayValueStores.length; a++){ showNumberPlates(arrayValueStores[a])}
+                }
+                
+            }
         }
-        else if(document.querySelector("input[name='town']:checked").value === "CapeTown")
-        {
-           
-        }
+       
     }
-
-
 
   window.addEventListener("load", function()
   {
     var PlatesValueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-    var arrayValues = Object.keys(PlatesValueStored); // It throws an array if nothing is added on local storage
-    
-    for(var p =0; p < arrayValues.length; p++)
-    {
-        showNumberPlates(arrayValues[p]);
+    if(PlatesValueStored !== undefined && PlatesValueStored !== null){
+        var arrayValues = Object.keys(PlatesValueStored); 
+        for(var p =0; p < arrayValues.length; p++)
+        {
+            showNumberPlates(arrayValues[p]);
+        }
     }
-
   })
   
-
-    
  showBtn.addEventListener('click', function () {
         checkLocation();
         
