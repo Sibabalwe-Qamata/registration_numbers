@@ -25,7 +25,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
 
   describe('The Registration Number Plates function (Filter Function)', function() 
 {
-  it('It should return the Number plates of the Town Choosen Town. (i.e Cape Town)',
+  it('It should return the an array of number plates of the town choosen. (i.e Cape Town)',
     function() {
       var numbers = displayRegNumberPlates({});
 
@@ -39,7 +39,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
      });
 
     
-      it('It should return the Number plates of the Town Choosen Town. (i.e Paarl)',
+      it('It should return the an array of number plates of the town choosen. (i.e Paarl)',
       function() {
         var numbers = displayRegNumberPlates({});
 
@@ -53,7 +53,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
        });
 
 
-       it('It should return the Number plates of the Town Choosen Town. (i.e Worcester)',
+       it('It should return the an array of number plates of the town choosen.. (i.e Worcester)',
        function() {
         var numbers = displayRegNumberPlates({});
   
@@ -63,6 +63,21 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         numbers.filterTown(numbers.PlateList(), "Worcester")
   
         assert.deepEqual(numbers.getWorcesterList(),['CW 785 254', 'CW 123 254']);
+         
+        });
+
+
+       it('It should return the an array of number plates of the town choosen.. (i.e All towns)',
+       function() {
+        var numbers = displayRegNumberPlates({});
+  
+        numbers.enterRegPlate('CW 785 254');
+        numbers.enterRegPlate('CA 112 254');
+        numbers.enterRegPlate('CJ 001 254');
+  
+        numbers.filterTown(numbers.PlateList(), "All")
+  
+        assert.deepEqual(numbers.all(),['CW 785 254', 'CA 112 254', 'CJ 001 254']);
          
         });
   });
