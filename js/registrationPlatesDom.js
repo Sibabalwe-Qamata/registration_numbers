@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function ()
     function verifyInput(getRegNum)
     {
         //Regex Function 
-        var regex = /^[\w ]+$/;
+        var regex = /^[a-zA-Z0-9-]+$/;
         var formatedInput = getRegNum.match(regex);
         if(formatedInput === null)
         {
@@ -92,8 +92,6 @@ document.addEventListener('DOMContentLoaded', function ()
             
              regNumText.value = "";
 
-
-
              var verifyPlate = RegToStore.getMap();
              if(numPlate !== '' && verifyInput(numPlate) === true)
              {
@@ -141,6 +139,10 @@ document.addEventListener('DOMContentLoaded', function ()
                  errorMsg.classList.add('userErrors');
                  errorMsg.textContent = "Oops that is an incorrect Input!";
                  showUserError.appendChild(errorMsg);
+
+                 while (showUserError.firstChild) {
+                    showUserError.removeChild(showUserError.firstChild);
+                } 
              }
           
 
@@ -162,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function ()
 
     function checkLocation() 
     {
+        //Check Error when the button is pressed without handling the User Input Error .....
         var locationIndicator =  document.querySelector("input[name='town']:checked").value; 
 
 
