@@ -25,7 +25,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
 
   describe('The Registration Number Plates function (Filter Function)', function() 
 {
-  it('It should return the an array of number plates of the town choosen. (i.e Cape Town)',
+  it('It should return  an array of number plates of the town choosen. (i.e Cape Town)',
     function() {
       var numbers = displayRegNumberPlates({});
 
@@ -39,7 +39,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
      });
 
     
-      it('It should return the an array of number plates of the town choosen. (i.e Paarl)',
+      it('It should return an array of number plates of the town choosen. (i.e Paarl)',
       function() {
         var numbers = displayRegNumberPlates({});
 
@@ -53,7 +53,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
        });
 
 
-       it('It should return the an array of number plates of the town choosen.. (i.e Worcester)',
+       it('It should return an array of number plates of the town choosen.. (i.e Worcester)',
        function() {
         var numbers = displayRegNumberPlates({});
   
@@ -67,7 +67,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         });
 
 
-       it('It should return the an array of number plates of the town choosen.. (i.e All towns)',
+       it('It should return an array of number plates of the town choosen.. (i.e All towns)',
        function() {
         var numbers = displayRegNumberPlates({});
   
@@ -82,7 +82,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         });
 
 
-        it('It should return the an array which does not contain any values since the are no registration numbers entered... (i.e All towns)',
+        it('It should return an array which does not contain any values since the are no registration numbers entered... (i.e All towns)',
         function() {
          var numbers = displayRegNumberPlates({});
    
@@ -93,7 +93,5 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         
           
          });
-
-
 
   });

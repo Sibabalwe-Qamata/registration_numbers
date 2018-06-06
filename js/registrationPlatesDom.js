@@ -21,12 +21,18 @@ document.addEventListener('DOMContentLoaded', function ()
     var RegToStore = displayRegNumberPlates(storedRegList);
 
 
-    //To-Do:   Add Verify function here
     function verifyInput(getRegNum)
     {
         //Regex Function 
-        if(getRegNum.length < 10){
-            console.log("Valid Registration");
+        var regex = /^[\w ]+$/;
+        var formatedInput = getRegNum.match(regex);
+        if(formatedInput === null)
+        {
+          return false;
+        }
+        else if(formatedInput.includes(getRegNum) === true)
+        {
+          return true;
         }
     }
 
@@ -83,11 +89,11 @@ document.addEventListener('DOMContentLoaded', function ()
      function addNumberPLate()
      {
              var numPlate = regNumText.value;
-             console.log(typeof(numPlate));
+            
              regNumText.value = "";
 
              var verifyPlate = RegToStore.getMap();
-             if(numPlate !== '')
+             if(numPlate !== '' && verifyInput(numPlate) === true)
              {
                 var numPlateFormat = numPlate.toUpperCase();
                 
@@ -98,9 +104,20 @@ document.addEventListener('DOMContentLoaded', function ()
                     var getRegPlate = RegToStore.getMap();
 
                     var lastOne = Object.keys(getRegPlate)[Object.keys(getRegPlate).length -1];
+                    console.log(lastOne);
                     localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
                     showNumberPlates(lastOne);
                 }
+             }
+             else if(verifyInput(numPlate) === false)
+             {
+                while (showUserError.firstChild) {
+                    showUserError.removeChild(showUserError.firstChild);
+                } 
+                var errorMsg = document.createElement("div"); 
+                 errorMsg.classList.add('userErrors');
+                 errorMsg.textContent = "Oops that is an incorrect Input!";
+                 showUserError.appendChild(errorMsg);
              }
           
 
@@ -124,10 +141,6 @@ document.addEventListener('DOMContentLoaded', function ()
     {
         var locationIndicator =  document.querySelector("input[name='town']:checked").value; 
 
-           // var CapeT =[];
-           // var Paarl_List = [];
-           // var Worcester = [];
-           // var allTowns = [];
 
             while (showRegNum.firstChild) {
             showRegNum.removeChild(showRegNum.firstChild);
@@ -139,22 +152,7 @@ document.addEventListener('DOMContentLoaded', function ()
             var arrayValueStores = Object.keys(valueStored);
             RegToStore.getPlatesStored(arrayValueStores);
 
-          
-            /**for(var k =0; k < arrayValueStores.length; k++)
-            {
-                if(arrayValueStores[k].startsWith("CA ") === true)
-                {
-                    CapeT.push(arrayValueStores[k]);
-                }
-                else if(arrayValueStores[k].startsWith("CJ ") === true)
-                {
-                    Paarl_List.push(arrayValueStores[k]);
-                }
-                else if(arrayValueStores[k].startsWith("CW ") === true){
-                    Worcester.push(arrayValueStores[k]);
-                }
-                allTowns.push(arrayValueStores[k]);
-            }  **/ 
+         
             RegToStore.filterTown(arrayValueStores, locationIndicator);
             if(locationIndicator === "CapeTown")
             {
