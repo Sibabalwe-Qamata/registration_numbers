@@ -111,9 +111,11 @@ document.addEventListener('DOMContentLoaded', function ()
 
                     var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
                     var arrayList = Object.keys(PlatesValues);
-                    console.log("Array :", arrayList);
+                   
+
+                    showNumberPlates(lastOne);
                     
-                    if(arrayList.includes(numPlateFormat) === true)
+                   /** if(arrayList.includes(numPlateFormat) === true)
                     {
                         while (showUserError.firstChild) {
                             showUserError.removeChild(showUserError.firstChild);
@@ -126,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function ()
                             showUserError.removeChild(showUserError.firstChild);
                         } 
                         showNumberPlates(lastOne);
-                    }
+                    }**/
                    
                 }
              }
