@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function ()
             
              regNumText.value = "";
 
+
+
              var verifyPlate = RegToStore.getMap();
              if(numPlate !== '' && verifyInput(numPlate) === true)
              {
@@ -102,11 +104,30 @@ document.addEventListener('DOMContentLoaded', function ()
                     RegToStore.enterRegPlate(numPlateFormat); 
                     
                     var getRegPlate = RegToStore.getMap();
-
+                    
                     var lastOne = Object.keys(getRegPlate)[Object.keys(getRegPlate).length -1];
-                    console.log(lastOne);
+                   
                     localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
-                    showNumberPlates(lastOne);
+
+                    var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+                    var arrayList = Object.keys(PlatesValues);
+                    console.log("Array :", arrayList);
+                    
+                    if(arrayList.includes(numPlateFormat) === true)
+                    {
+                        while (showUserError.firstChild) {
+                            showUserError.removeChild(showUserError.firstChild);
+                        } 
+                        errorsDisplayDuplicates();
+
+                    }
+                    else if (arrayList.includes(numPlateFormat) === false){
+                        while (showUserError.firstChild) {
+                            showUserError.removeChild(showUserError.firstChild);
+                        } 
+                        showNumberPlates(lastOne);
+                    }
+                   
                 }
              }
              else if(verifyInput(numPlate) === false)

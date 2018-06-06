@@ -62,13 +62,6 @@ function displayRegNumberPlates(NumberPlateDatabase)
         }
     }
     
-    function verifyPlatefromCape(list)
-    {
-        for(var v= 0 ; v < list.length; v++){
-
-        }
-    }
-
     //To-Do: a function to check it the number plate starts with "C" or end with "WP" and return true or false
 
     function getCapeTown(){
