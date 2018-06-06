@@ -60,6 +60,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
             }
             
         }
+        
     }
     
     //To-Do: a function to check it the number plate starts with "C" or end with "WP" and return true or false

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function ()
     function verifyInput(getRegNum)
     {
         //Regex Function 
-        var regex = /^[a-zA-Z0-9-]+$/;
+        var regex =/^[a-zA-Z0-9-]+ .*/;
         var formatedInput = getRegNum.match(regex);
         if(formatedInput === null)
         {
