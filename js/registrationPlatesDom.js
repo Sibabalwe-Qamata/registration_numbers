@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function ()
      function addNumberPLate()
      {
              var numPlate = regNumText.value;
-             console.log(typeof(numPlate));
              regNumText.value = "";
 
              var verifyPlate = RegToStore.getMap();
@@ -122,93 +121,78 @@ document.addEventListener('DOMContentLoaded', function ()
 
     function checkLocation() 
     {
-        var locationIndicator =  document.querySelector("input[name='town']:checked").value; 
-
-           // var CapeT =[];
-           // var Paarl_List = [];
-           // var Worcester = [];
-           // var allTowns = [];
+        var locationIndicator =  document.querySelector("input[name='town']:checked"); 
 
             while (showRegNum.firstChild) {
             showRegNum.removeChild(showRegNum.firstChild);
             }
 
-            if (locationIndicator !== null)
+            if(locationIndicator.value === null || locationIndicator === undefined){
+                errorsDisplay();
+            }
+            else if (locationIndicator.value !== null)
             {
-            var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-            var arrayValueStores = Object.keys(valueStored);
-            RegToStore.getPlatesStored(arrayValueStores);
+                var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+                var arrayValueStores = Object.keys(valueStored);
+                RegToStore.getPlatesStored(arrayValueStores);
 
-          
-            /**for(var k =0; k < arrayValueStores.length; k++)
-            {
-                if(arrayValueStores[k].startsWith("CA ") === true)
+            
+                RegToStore.filterTown(arrayValueStores, locationIndicator);
+                if(locationIndicator.value === "CapeTown")
                 {
-                    CapeT.push(arrayValueStores[k]);
-                }
-                else if(arrayValueStores[k].startsWith("CJ ") === true)
-                {
-                    Paarl_List.push(arrayValueStores[k]);
-                }
-                else if(arrayValueStores[k].startsWith("CW ") === true){
-                    Worcester.push(arrayValueStores[k]);
-                }
-                allTowns.push(arrayValueStores[k]);
-            }  **/ 
-            RegToStore.filterTown(arrayValueStores, locationIndicator);
-            if(locationIndicator === "CapeTown")
-            {
-                var forCape = RegToStore.getCapeTownList();
-                console.log(forCape);
-                if(forCape.length === 0){
-                    errorsDisplayUponFilter();
-                }
-                else{
-                    while (showUserError.firstChild) {
-                        showUserError.removeChild(showUserError.firstChild);
-                        }
-                for(var z =0 ; z <forCape.length; z++){ showNumberPlates(forCape[z])}
-                }
-               
-            }
-            if(locationIndicator === "Paarl")
-            {
-                var forPaarl = RegToStore.getPaarlList();
-                if(forPaarl.length === 0){
-                    errorsDisplayUponFilter();
-                }else{
-                    while (showUserError.firstChild) {
-                        showUserError.removeChild(showUserError.firstChild);
-                        }
-                for(var p =0 ; p <forPaarl.length; p++){ showNumberPlates(forPaarl[p])}}
-              
-            }
-            if(locationIndicator === "Worcester")
-            {
-                var forWorcester = RegToStore.getWorcesterList();
-                if(forWorcester.length === 0){
-                    errorsDisplayUponFilter();
-                }
-                else{
-                    while (showUserError.firstChild) {
-                        showUserError.removeChild(showUserError.firstChild);
-                        }
-                for(var w =0 ; w <forWorcester.length; w++){ showNumberPlates(forWorcester[w])}
-                }
-            }
-            if(locationIndicator === "All"){
-                var forAll = RegToStore.all(); 
-                if(forAll.length === 0){
-                    errorsDisplayUponFilter();
-                }
-                else{
-                    while (showUserError.firstChild) {
-                        showUserError.removeChild(showUserError.firstChild);
-                        }
-                    for(var a =0 ; a <arrayValueStores.length; a++){ showNumberPlates(arrayValueStores[a])}
-                }
+                    var forCape = RegToStore.getCapeTownList();
+                    if(forCape.length === 0){
+                        errorsDisplayUponFilter();
+                    }
+                    else{
+                        while (showUserError.firstChild) {
+                            showUserError.removeChild(showUserError.firstChild);
+                            }
+                    for(var z =0 ; z <forCape.length; z++){ showNumberPlates(forCape[z])}
+                    }
                 
-            }
+                }
+                if(locationIndicator.value === "Paarl")
+                {
+                    var forPaarl = RegToStore.getPaarlList();
+                    if(forPaarl.length === 0){
+                        errorsDisplayUponFilter();
+                    }else{
+                        while (showUserError.firstChild) {
+                            showUserError.removeChild(showUserError.firstChild);
+                            }
+                    for(var p =0 ; p <forPaarl.length; p++){ showNumberPlates(forPaarl[p])}}
+                
+                }
+                if(locationIndicator.value === "Worcester")
+                {
+                    var forWorcester = RegToStore.getWorcesterList();
+                    if(forWorcester.length === 0){
+                        errorsDisplayUponFilter();
+                    }
+                    else{
+                        while (showUserError.firstChild) {
+                            showUserError.removeChild(showUserError.firstChild);
+                            }
+                    for(var w =0 ; w <forWorcester.length; w++){ showNumberPlates(forWorcester[w])}
+                    }
+                }
+                if(locationIndicator.value === "All"){
+                    var forAll = RegToStore.all(); 
+                    if(forAll.length === 0){
+                        errorsDisplayUponFilter();
+                    }
+                    else{
+                        while (showUserError.firstChild) {
+                            showUserError.removeChild(showUserError.firstChild);
+                            }
+                        for(var a =0 ; a <arrayValueStores.length; a++){ showNumberPlates(arrayValueStores[a])}
+                    }
+                    
+                }
+        }
+        else{
+            
         }
        
     }
