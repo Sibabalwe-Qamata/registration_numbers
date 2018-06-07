@@ -32,23 +32,31 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
       numbers.enterRegPlate('CA 785 254');
       numbers.enterRegPlate('CA 123 254');
 
-      numbers.filterTown(numbers.PlateList(), "CapeTown")
+      numbers.filterTown('CA ');
 
-      assert.deepEqual(numbers.getCapeTownList(),['CA 785 254', 'CA 123 254']);
+      assert.equal(numbers.filterTown(),['CA 785 254', 'CA 123 254']);
+
+     });
+
+
+     it('It should return  false since the input is invalid.',
+    function() {
+      var numbers = displayRegNumberPlates({});
+      assert.equal(numbers.validateInput("ca134235467586"),false);
 
      });
 
     
-      it('It should return an array of number plates of the town choosen. (i.e Paarl)',
+     /*** it('It should return an array of number plates of the town choosen. (i.e Paarl)',
       function() {
         var numbers = displayRegNumberPlates({});
 
         numbers.enterRegPlate('CJ 785 254');
         numbers.enterRegPlate('CJ 123 254');
   
-        numbers.filterTown(numbers.PlateList(), "Paarl")
+        numbers.filterTown('CJ ');
   
-        assert.deepEqual(numbers.getPaarlList(),['CJ 785 254', 'CJ 123 254']);
+        assert.equal(numbers.filterTown(),['CJ 785 254', 'CJ 123 254']);
        
        });
 
@@ -60,9 +68,9 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         numbers.enterRegPlate('CW 785 254');
         numbers.enterRegPlate('CW 123 254');
   
-        numbers.filterTown(numbers.PlateList(), "Worcester")
+        numbers.filterTown('CW ')
   
-        assert.deepEqual(numbers.getWorcesterList(),['CW 785 254', 'CW 123 254']);
+        assert.equal(numbers.filterTown(),['CW 785 254', 'CW 123 254']);
          
         });
 
@@ -75,9 +83,9 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         numbers.enterRegPlate('CA 112 254');
         numbers.enterRegPlate('CJ 001 254');
   
-        numbers.filterTown(numbers.PlateList(), "All")
+        
   
-        assert.deepEqual(numbers.all(),['CW 785 254', 'CA 112 254', 'CJ 001 254']);
+        assert.equal(numbers.getStoredPlate("All"),['CW 785 254', 'CA 112 254', 'CJ 001 254']);
          
         });
 
@@ -92,6 +100,6 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
          assert.isArray(numbers.all(), 'The array does not contain any registration numbers')
         
           
-         });
+         });**/
 
   });
