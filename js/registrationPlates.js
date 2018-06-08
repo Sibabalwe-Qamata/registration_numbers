@@ -6,7 +6,7 @@ function displayRegNumberPlates(NumberPlateDatabase)
     var plateStored = NumberPlateDatabase || {};
 
     var PlateStoredList;
-
+    
 
     function setRegPlate(numPlate) 
     {
@@ -51,7 +51,8 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
     function filterRegPlate(TownChoice) 
     {
-       let townSelected = [];
+        var townSelected = [];
+       
        if(TownChoice === "All"){
             return PlateStoredList;
        }

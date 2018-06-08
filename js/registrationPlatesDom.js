@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function ()
     var showRegNumParent = document.getElementById("parentDisplay");
     var showRegNum = document.getElementById("display");
 
-    var theFirstChild = showRegNum.firstChild;
+    //var theFirstChild = showRegNum.firstChild;
 
     var showUserError = document.getElementById("errors");
 
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function ()
         errorMsg.classList.add('userErrors');
 
         errorMsg.textContent = "Error Input! Please enter a Western Cape Registration Number Plate and the press the Add button!";
-        showUserError.appendChild(errorMsg);
+        showRegNum.appendChild(errorMsg);
     }
 
     function errorsDisplayDuplicates()
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function ()
         errorMsg.classList.add('userErrors');
 
         errorMsg.textContent = "Oops that is a Duplicate!";
-        showUserError.appendChild(errorMsg);
+        showRegNum.appendChild(errorMsg);
     }
 
     function errorsDisplayUponFilter()
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function ()
         errorMsg.classList.add('userErrors');
 
         errorMsg.textContent = "Oops town Selected is not in the list!";
-        showUserError.appendChild(errorMsg);
+        sshowRegNum.appendChild(errorMsg);
     }
     
     function checkDuplicate(regPlate){
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', function ()
         if(containsPlate === true)
         {
             errorsDisplayDuplicates()
-            while (showUserError.firstChild) {
-                showUserError.removeChild(showUserError.firstChild);
+            while (showRegNum.firstChild) {
+                sshowRegNum.removeChild(showRegNum.firstChild);
             }
 
         }
@@ -71,10 +71,7 @@ document.addEventListener('DOMContentLoaded', function ()
      function addNumberPLate()
      {
              var numPlate = regNumText.value;
-<<<<<<< HEAD
-=======
             
->>>>>>> 1dff91758a7cc7311420c27f8e7beb47a51857a7
              regNumText.value = "";
 
              var verifyPlate = RegToStore.getMap();
@@ -97,29 +94,33 @@ document.addEventListener('DOMContentLoaded', function ()
                    
                     RegToStore.getPlatesStored(arrayList);
 
-                    showNumberPlates(lastOne);
+                   
+                    showNumberPlates(numPlateFormat);
+
                     /**if(arrayList.includes(numPlateFormat) === true)
                     {
-                        while (showUserError.firstChild) {
-                            showUserError.removeChild(showUserError.firstChild);
-                        }
-                        window.setInterval(errorsDisplayDuplicates(), 1000);
+                        setTimeout(alert("That is a duplicate registration number!"), 3000);
                     }
                     else{
-                        showNumberPlates(lastOne);
+                        showNumberPlates(numPlateFormat);
                     }**/
                    
                 }
+
+
+
+
+                
              }
-             else if(verifyInput(numPlate) === false)
+             else if(RegToStore.validateInput(numPlate) === false)
              {
-                while (showUserError.firstChild) {
-                    showUserError.removeChild(showUserError.firstChild);
-                } 
-                var errorMsg = document.createElement("div"); 
-                 errorMsg.classList.add('userErrors');
-                 errorMsg.textContent = "Oops that is an incorrect Input!";
-                 showUserError.appendChild(errorMsg); 
+               /** while (showRegNum.firstChild) {
+                    showRegNum.removeChild(showRegNum.firstChild);
+                } **/
+                setTimeout(function(){  
+                    alert("Oops that an Error Input. Please enter the correct input!");
+                }, 3000);
+               
              }
      }
 
@@ -139,79 +140,6 @@ document.addEventListener('DOMContentLoaded', function ()
 
     function checkLocation() 
     {
-<<<<<<< HEAD
-        var locationIndicator =  document.querySelector("input[name='town']:checked"); 
-
-            while (showRegNum.firstChild) {
-            showRegNum.removeChild(showRegNum.firstChild);
-            }
-
-            if(locationIndicator.value === null || locationIndicator === undefined){
-                errorsDisplay();
-            }
-            else if (locationIndicator.value !== null)
-            {
-                var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-                var arrayValueStores = Object.keys(valueStored);
-                RegToStore.getPlatesStored(arrayValueStores);
-
-            
-                RegToStore.filterTown(arrayValueStores, locationIndicator);
-                if(locationIndicator.value === "CapeTown")
-                {
-                    var forCape = RegToStore.getCapeTownList();
-                    if(forCape.length === 0){
-                        errorsDisplayUponFilter();
-                    }
-                    else{
-                        while (showUserError.firstChild) {
-                            showUserError.removeChild(showUserError.firstChild);
-                            }
-                    for(var z =0 ; z <forCape.length; z++){ showNumberPlates(forCape[z])}
-                    }
-                
-                }
-                if(locationIndicator.value === "Paarl")
-                {
-                    var forPaarl = RegToStore.getPaarlList();
-                    if(forPaarl.length === 0){
-                        errorsDisplayUponFilter();
-                    }else{
-                        while (showUserError.firstChild) {
-                            showUserError.removeChild(showUserError.firstChild);
-                            }
-                    for(var p =0 ; p <forPaarl.length; p++){ showNumberPlates(forPaarl[p])}}
-                
-                }
-                if(locationIndicator.value === "Worcester")
-                {
-                    var forWorcester = RegToStore.getWorcesterList();
-                    if(forWorcester.length === 0){
-                        errorsDisplayUponFilter();
-                    }
-                    else{
-                        while (showUserError.firstChild) {
-                            showUserError.removeChild(showUserError.firstChild);
-                            }
-                    for(var w =0 ; w <forWorcester.length; w++){ showNumberPlates(forWorcester[w])}
-                    }
-                }
-                if(locationIndicator.value === "All"){
-                    var forAll = RegToStore.all(); 
-                    if(forAll.length === 0){
-                        errorsDisplayUponFilter();
-                    }
-                    else{
-                        while (showUserError.firstChild) {
-                            showUserError.removeChild(showUserError.firstChild);
-                            }
-                        for(var a =0 ; a <arrayValueStores.length; a++){ showNumberPlates(arrayValueStores[a])}
-                    }
-                    
-                }
-        }
-        else{
-=======
         //Check Error when the button is pressed without handling the User Input Error .....
             var locationIndicator =  document.querySelector("input[name='town']:checked"); 
         if (locationIndicator.value !== null)
@@ -227,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function ()
                 showNumberPlates(selectedTownsArray[p]);
             
             }
->>>>>>> 1dff91758a7cc7311420c27f8e7beb47a51857a7
             
         }
     }

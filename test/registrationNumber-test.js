@@ -2,13 +2,13 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
 {
   it('It should return the Number plates of the Town Given. (i.e Cape Town)',
     function() {
-      var numbers = displayRegNumberPlates({});
+      var numbers = displayRegNumberPlates();
 
       numbers.enterRegPlate("CA 785 965");
       assert.equal(numbers.getPlate(), "CA 785 965");
      });
 
-     it('It should return the Number plates of the Town Given. (i.e Worcester)',
+     /**it('It should return the Number plates of the Town Given. (i.e Worcester)',
      function() {
        var numbers = displayRegNumberPlates({});
        numbers.enterRegPlate("CW 785 965");
@@ -20,14 +20,14 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
         var numbers = displayRegNumberPlates({});
         numbers.enterRegPlate("CJ 785 965");
         assert.equal(numbers.getPlate(), "CJ 785 965");
-       });
+       });**/
   });
 
   describe('The Registration Number Plates function (Filter Function)', function() 
 {
   it('It should return  an array of number plates of the town choosen. (i.e Cape Town)',
     function() {
-      var numbers = displayRegNumberPlates({});
+      var numbers = displayRegNumberPlates();
 
       numbers.enterRegPlate('CA 785 254');
       numbers.enterRegPlate('CA 123 254');
@@ -41,7 +41,7 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
 
      it('It should return  false since the input is invalid.',
     function() {
-      var numbers = displayRegNumberPlates({});
+      var numbers = displayRegNumberPlates();
       assert.equal(numbers.validateInput("ca134235467586"),false);
 
      });
