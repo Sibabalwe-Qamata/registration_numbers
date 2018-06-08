@@ -14,56 +14,24 @@ document.addEventListener('DOMContentLoaded', function ()
 
     var showUserError = document.getElementById("errors");
 
-   
-
     //Below to get the stored users from local storage
     var storedRegList = localStorage.getItem('Plate') ? JSON.parse(localStorage.getItem('Plate')) : {};
     var RegToStore = displayRegNumberPlates(storedRegList);
 
-
    
-
-   
-    function errorsDisplay()
-    {
-        var errorMsg = document.createElement("div"); 
-        errorMsg.classList.add('userErrors');
-
-        errorMsg.textContent = "Error Input! Please enter a Western Cape Registration Number Plate and the press the Add button!";
-        showRegNum.appendChild(errorMsg);
-    }
-
-    function errorsDisplayDuplicates()
-    {
-        var errorMsg = document.createElement("div"); 
-        errorMsg.classList.add('userErrors');
-
-        errorMsg.textContent = "Oops that is a Duplicate!";
-        showRegNum.appendChild(errorMsg);
-    }
-
-    function errorsDisplayUponFilter()
-    {
-        var errorMsg = document.createElement("div"); 
-        errorMsg.classList.add('userErrors');
-
-        errorMsg.textContent = "Oops town Selected is not in the list!";
-        sshowRegNum.appendChild(errorMsg);
-    }
-    
     function checkDuplicate(regPlate){
         var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-        var arrayValueStores = Object.keys(valueStored);
-        RegToStore.getPlatesStored(arrayValueStores);
+       
+       /** var arrayValueStores = Object.keys(valueStored);
 
+        //Not defined...
+        RegToStore.getPlatesStored(arrayValueStores);**/
 
-        const containsPlate = arrayValueStores.some( element => element === numPlateFormat);
-        if(containsPlate === true)
+        RegToStore(valueStored);
+        var containsPlate = arrayValueStores.some( element => element === numPlateFormat);
+        if(containsPlate)
         {
-            errorsDisplayDuplicates()
-            while (showRegNum.firstChild) {
-                sshowRegNum.removeChild(showRegNum.firstChild);
-            }
+           return true;
 
         }
     }
@@ -74,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function ()
             
              regNumText.value = "";
 
-             var verifyPlate = RegToStore.getMap();
+            // var verifyPlate = RegToStore.getAll();
              if(numPlate !== '' && RegToStore.validateInput(numPlate) === true)
              {
                 var numPlateFormat = numPlate.toUpperCase();
@@ -83,42 +51,22 @@ document.addEventListener('DOMContentLoaded', function ()
                 {
                     RegToStore.enterRegPlate(numPlateFormat); 
                     
-                    var getRegPlate = RegToStore.getMap();
+                    var getRegPlate = RegToStore.getStoredList();
                     
-                    var lastOne = Object.keys(getRegPlate)[Object.keys(getRegPlate).length -1];
+                   // var lastOne = Object.keys(getRegPlate)[Object.keys(getRegPlate).length -1];
                    
                     localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
 
                     var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
                     var arrayList = Object.keys(PlatesValues);
-                   
-                    RegToStore.getPlatesStored(arrayList);
-
-                   
-                    showNumberPlates(numPlateFormat);
-
-                    /**if(arrayList.includes(numPlateFormat) === true)
-                    {
-                        setTimeout(alert("That is a duplicate registration number!"), 3000);
-                    }
-                    else{
-                        showNumberPlates(numPlateFormat);
-                    }**/
-                   
-                }
-
-
-
-
-                
+                    
+                    showNumberPlates(numPlateFormat);   
+                    }                
              }
              else if(RegToStore.validateInput(numPlate) === false)
              {
-               /** while (showRegNum.firstChild) {
-                    showRegNum.removeChild(showRegNum.firstChild);
-                } **/
                 setTimeout(function(){  
-                    alert("Oops that an Error Input. Please enter the correct input!");
+                    alert("Oops that is an Error Input. Please enter the correct input!");
                 }, 3000);
                
              }
@@ -141,13 +89,13 @@ document.addEventListener('DOMContentLoaded', function ()
     function checkLocation() 
     {
         //Check Error when the button is pressed without handling the User Input Error .....
-            var locationIndicator =  document.querySelector("input[name='town']:checked"); 
+        var locationIndicator =  document.querySelector("input[name='town']:checked"); 
         if (locationIndicator.value !== null)
         {
             var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-            var arrayValueStores = Object.keys(valueStored);
-            RegToStore.getPlatesStored(arrayValueStores);
-            var selectedTownsArray = RegToStore.filterTown(locationIndicator.value);
+            var check = displayRegNumberPlates(valueStored);
+            
+            var selectedTownsArray = check.filterTown(locationIndicator.value);
             
             showRegNum.innerHTML = '';
             for(var p =0 ; p <selectedTownsArray.length; p++)
