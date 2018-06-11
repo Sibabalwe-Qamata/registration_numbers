@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function ()
     var showRegNumParent = document.getElementById("parentDisplay");
     var showRegNum = document.getElementById("display");
 
-    //var theFirstChild = showRegNum.firstChild;
-
     var showUserError = document.getElementById("errors");
 
     //Below to get the stored users from local storage
@@ -21,12 +19,7 @@ document.addEventListener('DOMContentLoaded', function ()
    
     function checkDuplicate(regPlate){
         var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-       
-       /** var arrayValueStores = Object.keys(valueStored);
-
-        //Not defined...
-        RegToStore.getPlatesStored(arrayValueStores);**/
-
+    
         RegToStore(valueStored);
         var containsPlate = arrayValueStores.some( element => element === numPlateFormat);
         if(containsPlate)
@@ -36,20 +29,41 @@ document.addEventListener('DOMContentLoaded', function ()
         }
     }
 
+
+    function checkWesternCapePlate(regPlateNumber)
+    {
+        var j = 0;
+        var res = false;
+        var WCplates =  ['CA ','CAM','CAR','CAW', 'CBL', 'CBM', 'CBR', 'CBS', 'CBT', 'CBY','CCA','CCC','CCD', 'CCK','CCM', 'CCO',
+        'CCP', 'CEA', 'CEG', 'CEM', 'CEO','CER', 'CES', 'CEX' ,'CEY', 'CFA', 'CFG', 'CFM','CFP', 'CFR','CG ', 'CJ ', 'CK ', 
+        'CL ', 'CN ', 'CO ', 'CR ','CS ', 'CT ', 'CV ','CW ', 'CX ' ,'CY ', 'CZ '];
+
+        
+        for(j; j < WCplates.length; j++){
+            
+            if(WCplates[j] === regPlateNumber){
+                res =  true;
+            }
+            
+        }
+        return res;
+      
+    }
+
      function addNumberPLate()
      {
-             var numPlate = regNumText.value;
-            
+             var numPlate = regNumText.value.toUpperCase();
              regNumText.value = "";
+             var location = numPlate.slice(0,3).toUpperCase();
 
             // var verifyPlate = RegToStore.getAll();
-             if(numPlate !== '' && RegToStore.validateInput(numPlate) === true)
+             if((numPlate !== '' && RegToStore.validateInput(numPlate) && checkWesternCapePlate(location)))
              {
-                var numPlateFormat = numPlate.toUpperCase();
+            
                 
-                if(numPlateFormat)
+                if(numPlate)
                 {
-                    RegToStore.enterRegPlate(numPlateFormat); 
+                    RegToStore.enterRegPlate(numPlate); 
                     
                     var getRegPlate = RegToStore.getStoredList();
                     
@@ -60,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function ()
                     var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
                     var arrayList = Object.keys(PlatesValues);
                     
-                    showNumberPlates(numPlateFormat);   
+                    showNumberPlates(numPlate);   
                     }                
              }
-             else if(RegToStore.validateInput(numPlate) === false)
+             else if((RegToStore.validateInput(numPlate) === false))
              {
                 setTimeout(function(){  
                     alert("Oops that is an Error Input. Please enter the correct input!");
