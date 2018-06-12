@@ -62,6 +62,28 @@ describe('The Registration Number Plates Factory Function (getNumberPlates Funct
        
        });
 
+       it('It should return an array of number plates of the town choosen. (i.e George)',
+       function() {
+         var numbers = displayRegNumberPlates({});
+ 
+         numbers.enterRegPlate('CAW 785 254');
+         numbers.enterRegPlate('CAW 123 254');
+   
+         assert.deepEqual(numbers.filterTown('CAW'),['CAW 785 254', 'CAW 123 254']);
+        
+        });
+
+        it('It should return an array of number plates of the town choosen. (i.e Somerset West)',
+       function() {
+         var numbers = displayRegNumberPlates({});
+ 
+         numbers.enterRegPlate('CFM 785 254');
+         numbers.enterRegPlate('CFM 123 254');
+   
+         assert.deepEqual(numbers.filterTown('CFM'),['CFM 785 254', 'CFM 123 254']);
+        
+        });
+
        it('It should return an array of number plates of the town choosen.. (i.e All towns)',
        function() {
         var numbers = displayRegNumberPlates({});
