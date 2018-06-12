@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function ()
     var showUserError = document.getElementById("errors");
 
     //Below to get the stored users from local storage
-    var storedRegList = localStorage.getItem('Plate') ? JSON.parse(localStorage.getItem('Plate')) : {};
+    var storedRegList = localStorage.getItem('RegistrationNumbers') ? JSON.parse(localStorage.getItem('RegistrationNumbers')) : {};
     var RegToStore = displayRegNumberPlates(storedRegList);
 
    
@@ -59,9 +59,16 @@ document.addEventListener('DOMContentLoaded', function ()
 
              if((numPlate !== '' && RegToStore.validateInput(numPlate) && checkWesternCapePlate(location)))
              {
-            
-                
-                if(numPlate)
+                var duplicateCheck = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+                var arrayDuplicateCheck = Object.keys(duplicateCheck);
+
+                if(arrayDuplicateCheck.length > 0 && arrayDuplicateCheck.includes(numPlate) === true)
+                {
+                    setTimeout(function(){  
+                        alert("Oops that is a Duplicate. Please enter the correct input!");
+                    }, 1000);
+                }
+                if(numPlate && arrayDuplicateCheck.includes(numPlate) === false)
                 {
                     RegToStore.enterRegPlate(numPlate); 
                     
@@ -110,8 +117,6 @@ document.addEventListener('DOMContentLoaded', function ()
             
             var selectedTownsArray = check.filterTown(locationIndicator.value);
 
-            //console.log(locationIndicator.value);
-            
             showRegNum.innerHTML = '';
             for(var p =0 ; p <selectedTownsArray.length; p++)
             { 
@@ -119,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function ()
             
             
             }
-            console.log(selectedTownsArray[p]);
+          
         }
     }
 
@@ -142,8 +147,4 @@ addBtn.addEventListener('click', function () {
     addNumberPLate();
   });
 
-/***resetBtn.addEventListener('click', function(){
-
-
-  });***/
 });
