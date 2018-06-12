@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function ()
 
     var regNumText = document.querySelector(".regNumber");
     var addBtn = document.querySelector(".add");
+    //var resetBtn = document.querySelector(".reset");
     var showBtn = document.querySelector(".show");
     var DisplayPlates = document.querySelector(".list-plates");
 
@@ -56,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function ()
              regNumText.value = "";
              var location = numPlate.slice(0,3).toUpperCase();
 
-            // var verifyPlate = RegToStore.getAll();
              if((numPlate !== '' && RegToStore.validateInput(numPlate) && checkWesternCapePlate(location)))
              {
             
@@ -66,8 +66,7 @@ document.addEventListener('DOMContentLoaded', function ()
                     RegToStore.enterRegPlate(numPlate); 
                     
                     var getRegPlate = RegToStore.getStoredList();
-                    
-                   // var lastOne = Object.keys(getRegPlate)[Object.keys(getRegPlate).length -1];
+                
                    
                     localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
 
@@ -81,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function ()
              {
                 setTimeout(function(){  
                     alert("Oops that is an Error Input. Please enter the correct input!");
-                }, 3000);
+                }, 1000);
                
              }
      }
@@ -110,14 +109,17 @@ document.addEventListener('DOMContentLoaded', function ()
             var check = displayRegNumberPlates(valueStored);
             
             var selectedTownsArray = check.filterTown(locationIndicator.value);
+
+            //console.log(locationIndicator.value);
             
             showRegNum.innerHTML = '';
             for(var p =0 ; p <selectedTownsArray.length; p++)
             { 
                 showNumberPlates(selectedTownsArray[p]);
             
-            }
             
+            }
+            console.log(selectedTownsArray[p]);
         }
     }
 
@@ -133,12 +135,15 @@ document.addEventListener('DOMContentLoaded', function ()
     }
   })
   
- showBtn.addEventListener('click', function () {
+showBtn.addEventListener('click', function () {
         checkLocation();
       });  
 addBtn.addEventListener('click', function () {
     addNumberPLate();
   });
 
-  
+/***resetBtn.addEventListener('click', function(){
+
+
+  });***/
 });
