@@ -60,28 +60,42 @@ document.addEventListener('DOMContentLoaded', function ()
              if((numPlate !== '' && RegToStore.validateInput(numPlate) && checkWesternCapePlate(location)))
              {
                 var duplicateCheck = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-                var arrayDuplicateCheck = Object.keys(duplicateCheck);
+                
 
-                if(arrayDuplicateCheck.length > 0 && arrayDuplicateCheck.includes(numPlate) === true)
+                if(duplicateCheck !== null)
+                {
+                    var arrayDuplicateCheck = Object.keys(duplicateCheck);
+                    if(arrayDuplicateCheck.includes(numPlate) === true)
+                    {
+                        setTimeout(function(){  
+                            alert("Oops that is a Duplicate. Please enter the correct input!");
+                        }, 1000);
+                    }
+                    else if(arrayDuplicateCheck.includes(numPlate) === false)
+                    {
+                        RegToStore.enterRegPlate(numPlate); 
+                    
+                        var getRegPlate = RegToStore.getStoredList();
+                    
+                       
+                        localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
+    
+                        var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+                        var arrayList = Object.keys(PlatesValues);
+                        
+                        showNumberPlates(numPlate);  
+                    }
+
+
+
+
+                }
+                if(duplicateCheck === null)
                 {
                     setTimeout(function(){  
-                        alert("Oops that is a Duplicate. Please enter the correct input!");
-                    }, 1000);
-                }
-                if(numPlate && arrayDuplicateCheck.includes(numPlate) === false)
-                {
-                    RegToStore.enterRegPlate(numPlate); 
-                    
-                    var getRegPlate = RegToStore.getStoredList();
-                
-                   
-                    localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
-
-                    var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-                    var arrayList = Object.keys(PlatesValues);
-                    
-                    showNumberPlates(numPlate);   
-                    }                
+                        alert("No registration numbers stored. Please enter the correct input!");
+                    }, 1000);  
+                 }                
              }
              else if((RegToStore.validateInput(numPlate) === false))
              {
