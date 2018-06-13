@@ -121,12 +121,17 @@ document.addEventListener('DOMContentLoaded', function ()
 
             showUserError.innerHTML  = '';
             showRegNum.innerHTML = '';
-            for(var p =0 ; p <selectedTownsArray.length; p++)
-            { 
-                showNumberPlates(selectedTownsArray[p]);
-            
-            
+            if(selectedTownsArray.length > 0){
+                for(var p =0 ; p <selectedTownsArray.length; p++)
+                { 
+                    console.log(selectedTownsArray[p]);
+                    showNumberPlates(selectedTownsArray[p]);
+                }
             }
+            else{
+                showUserError.innerHTML  = 'Town selected is not in the list. Please add town!';
+            }
+            
           
         }
     }
