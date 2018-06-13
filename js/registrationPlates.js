@@ -23,16 +23,15 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
     function verifyInput(getRegNum)
     {
-        console.log(getRegNum)
         var regex =/^\w+[a-zA-Z0-9-]+ .*/;
         var formatedInput = getRegNum.match(regex);
         
         
-        if(formatedInput === null || (getRegNum.length > 11))
+        if((getRegNum.length > 11))
         {
           return false;
         }
-        else if((formatedInput.includes(getRegNum)) === true && (getRegNum.length <= 11))
+        else if((getRegNum.length <= 11))
         {
           return true;
         }

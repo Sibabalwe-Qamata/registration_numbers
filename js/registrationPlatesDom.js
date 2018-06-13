@@ -3,15 +3,16 @@ document.addEventListener('DOMContentLoaded', function ()
 
     var regNumText = document.querySelector(".regNumber");
     var addBtn = document.querySelector(".add");
-    //var resetBtn = document.querySelector(".reset");
+    var resetBtn = document.querySelector(".reset");
     var showBtn = document.querySelector(".show");
     var DisplayPlates = document.querySelector(".list-plates");
+    var showUserError = document.querySelector(".errorDisplay");
 
 
     var showRegNumParent = document.getElementById("parentDisplay");
     var showRegNum = document.getElementById("display");
 
-    var showUserError = document.getElementById("errors");
+    //var showUserError = document.getElementById(".errorDisplay");
 
     //Below to get the stored users from local storage
     var storedRegList = localStorage.getItem('RegistrationNumbers') ? JSON.parse(localStorage.getItem('RegistrationNumbers')) : {};
@@ -59,17 +60,16 @@ document.addEventListener('DOMContentLoaded', function ()
 
              if((numPlate !== '' && RegToStore.validateInput(numPlate) && checkWesternCapePlate(location)))
              {
-                var duplicateCheck = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+     
                 
 
-                if(duplicateCheck !== null)
+                if(storedRegList !== null)
                 {
-                    var arrayDuplicateCheck = Object.keys(duplicateCheck);
+                    var arrayDuplicateCheck = Object.keys(storedRegList);
                     if(arrayDuplicateCheck.includes(numPlate) === true)
                     {
-                        setTimeout(function(){  
-                            alert("Oops that is a Duplicate. Please enter the correct input!");
-                        }, 1000);
+                        showUserError.innerHTML = "Oops that is a Duplicate. Please enter the correct input!";
+                    
                     }
                     else if(arrayDuplicateCheck.includes(numPlate) === false)
                     {
@@ -83,26 +83,14 @@ document.addEventListener('DOMContentLoaded', function ()
                         var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
                         var arrayList = Object.keys(PlatesValues);
                         
+                        showUserError.innerHTML  = '';
                         showNumberPlates(numPlate);  
                     }
-
-
-
-
-                }
-                if(duplicateCheck === null)
-                {
-                    setTimeout(function(){  
-                        alert("No registration numbers stored. Please enter the correct input!");
-                    }, 1000);  
-                 }                
+                }              
              }
              else if((RegToStore.validateInput(numPlate) === false))
              {
-                setTimeout(function(){  
-                    alert("Oops that is an Error Input. Please enter the correct input!");
-                }, 1000);
-               
+                 showUserError.innerHTML = "Oops that is an Error Input. Please enter the correct input!";
              }
      }
 
@@ -131,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function ()
             
             var selectedTownsArray = check.filterTown(locationIndicator.value);
 
+            showUserError.innerHTML  = '';
             showRegNum.innerHTML = '';
             for(var p =0 ; p <selectedTownsArray.length; p++)
             { 
@@ -160,5 +149,14 @@ showBtn.addEventListener('click', function () {
 addBtn.addEventListener('click', function () {
     addNumberPLate();
   });
+
+  resetBtn.addEventListener('click', function ()
+   {
+    window.location.reload();
+    localStorage.clear();
+    showRegNum.innerHTML = '';
+
+   }
+  );
 
 });
