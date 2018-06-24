@@ -34,7 +34,9 @@ describe('The Registration Number Plates function (getNumberPlates Function)', f
 
       numbers.filterTown('CA ');
 
-      assert.equal(numbers.filterTown(),['CA 785 254', 'CA 123 254']);
+      assert.equal(numbers.filterTown(
+        
+      ),['CA 785 254', 'CA 123 254']);
 
      });
 
