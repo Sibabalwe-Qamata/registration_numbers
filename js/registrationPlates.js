@@ -3,95 +3,77 @@ function displayRegNumberPlates(NumberPlateDatabase)
 
     var numberPlateDisplay = '';
     var town = '';
+
     var plateStored = NumberPlateDatabase || {};
-
-    var PlateStoredList;
-    
-
+   
     function setRegPlate(numPlate) 
     {
         if (numPlate !== " ") {
             numberPlateDisplay = numPlate;
         }
 
-        if (plateStored [numPlate] === undefined) 
+        if (plateStored[numPlate] === undefined) 
         {
             plateStored[numPlate] = 0;
         }
     }
-
-    function setTownLocation(location) {
-        town = location;
+    function getRegPlate(){
+        return numberPlateDisplay;
     }
-    function filterTownStored(arrayStored)
-    {
-        PlateStoredList = arrayStored;
-       
-    }
-
 
     function verifyInput(getRegNum)
     {
-        //Regex Function 
         var regex =/^\w+[a-zA-Z0-9-]+ .*/;
         var formatedInput = getRegNum.match(regex);
-        if(formatedInput === null || (getRegNum.length> 10))
+        
+        
+        if((getRegNum.length > 11))
         {
           return false;
         }
-        else if((formatedInput.includes(getRegNum)) === true && (getRegNum.length <= 10))
+        else if((getRegNum.length <= 11))
         {
           return true;
         }
     }
-    
-    function getPlateStoredLocalStorage(){
-        return PlateStoredList;
+   
+    function getRegPlateList()
+    {
+        return plateStored;
     }
-
+   
     function filterRegPlate(TownChoice) 
     {
         var townSelected = [];
        
+        var newArray = Object.keys(plateStored);
+
        if(TownChoice === "All"){
-            return PlateStoredList;
+            return newArray ;
        }
-       for(var i = 0; i <PlateStoredList.length; i++)
+       for(var i = 0; i <newArray.length; i++)
        {
-            if(PlateStoredList[i].startsWith(TownChoice))
+            if(newArray[i].startsWith(TownChoice))
             {
-                townSelected.push(PlateStoredList[i]);
+                townSelected.push(newArray[i]);
 
             } 
        }
        return townSelected;
     }
     
-
-    function getRegPlate() {
-        return numberPlateDisplay;
-    }
-
-    function getLocationMap() {
-        return plateStored;
-    }
-
-
-   
+  
     return {
         enterRegPlate: setRegPlate,
-        set_town: setTownLocation,
-
+    
         validateInput: verifyInput,
 
         getPlate: getRegPlate,
-        getMap: getLocationMap,
+        
+        getStoredList: getRegPlateList,
 
-        getPlatesStored: filterTownStored,
+        filterTown:filterRegPlate
 
-        filterTown:filterRegPlate,
-
-        getStoredPlate : getPlateStoredLocalStorage
       
      }
 
