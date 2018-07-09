@@ -35,15 +35,7 @@ describe('The Registration Number Plates Factory Function (getNumberPlates Funct
       numbers.enterRegPlate('CA 785 254');
       numbers.enterRegPlate('CA 123 254');
 
-<<<<<<< HEAD
-      numbers.filterTown('CA ');
-
-      assert.equal(numbers.filterTown(
-        
-      ),['CA 785 254', 'CA 123 254']);
-=======
       assert.deepEqual(numbers.filterTown('CA '),['CA 785 254', 'CA 123 254']);
->>>>>>> 1abe34e71cc2acb591979165b5744da194487b4e
 
      });
 
