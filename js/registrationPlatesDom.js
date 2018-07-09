@@ -1,3 +1,4 @@
+"use strict";
 document.addEventListener('DOMContentLoaded', function () 
 {
 
@@ -5,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function ()
     var addBtn = document.querySelector(".add");
     var resetBtn = document.querySelector(".reset");
     var showBtn = document.querySelector(".show");
+    //let normalFilter = document.querySelector(".selectWhichTown").value;
     var DisplayPlates = document.querySelector(".list-plates");
     var showUserError = document.querySelector(".errorDisplay");
 
@@ -110,14 +112,16 @@ document.addEventListener('DOMContentLoaded', function ()
 
     function checkLocation() 
     {
-        //Check Error when the button is pressed without handling the User Input Error .....
-        var locationIndicator =  document.querySelector("input[name='town']:checked"); 
-        if (locationIndicator.value !== null)
+        let normalFilter = document.querySelector(".selectWhichTown").value;
+        console.log(normalFilter);
+
+
+        if (normalFilter !== null)
         {
-            var valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-            var check = displayRegNumberPlates(valueStored);
+            let valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+            let check = displayRegNumberPlates(valueStored);
             
-            var selectedTownsArray = check.filterTown(locationIndicator.value);
+            let selectedTownsArray = check.filterTown(normalFilter);
 
             showUserError.innerHTML  = '';
             showRegNum.innerHTML = '';
