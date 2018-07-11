@@ -27,6 +27,16 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+      <style>
+      
+
+
+      
+      
+      
+      </style>
+
 </head>
 <body>
 
@@ -77,14 +87,14 @@
       <div class="six columns" id="box">
         <h4> Handlebars Widget</h4>
 
- <input id="numberPlate" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumber"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a Number Plate e.g 'CA31004'">
+ <input id="numberPlateHandlebars" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumberHandlebars"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a Number Plate e.g 'CA31004'">
 
-          <button class="button add">Add</button>
-          <button class="button reset">Reset</button>
+          <button class="button addHandlebars">Add</button>
+          <button class="button resetHandlebars">Reset</button>
 
         <div class="normalFilter">
             <label for="Town: "></label>
-            <select class="selectWhichTown" name="selectTown">
+            <select class="selectWhichTownHandlebars" name="selectTown">
               <option class="selectWhichTown" value="All">All Towns</option>
               <option class="selectWhichTown" value="CA ">Cape Town</option>
               <option class="selectWhichTown" value="CJ ">Paarl</option>
@@ -95,19 +105,22 @@
           </div>
         
 
-        <button class="button show">Filter</button>
+        <button class="button showHandlebars">Filter</button>
 
-        <div class="twelve columns  errorDisplay">
+        <div class="twelve columns  errorDisplayHandlebars">
            
         </div>
+        
+        <ul class"list-platesHandlebars" id="errors">
+        </ul>
 
-        <ul class"list-plates" id="display">
+        <ul class"list-platesHandlebars" id="display">
         </ul>
 
 
       </div>
     </div>
-    <hr style="margin-top: 1%;margin-bottom:1%;margin-right:1%; background-color:black;">
+    <b><hr style="margin-top: 1%;margin-bottom:1%;margin-right:1%; background-color:black;"><b>
 
     <div class="row">
         <div class="twelve columns">
@@ -116,19 +129,13 @@
             </footer>
         </div>
     </div>
-  </div>
-
-      
-
-       
-     
-   
-  
+  </div>  
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <script src="js/registrationPlates.js" charset="utf-8"></script>
 <script src="js/registrationPlatesDom.js" charset="utf-8"></script>
+<script src="js/registrationTemplateDom.js" charset="utf-8"></script>
 
 </body>
 </html>
