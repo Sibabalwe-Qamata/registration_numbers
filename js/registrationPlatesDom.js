@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function ()
     var showRegNumParent = document.getElementById("parentDisplay");
     var showRegNum = document.getElementById("display");
 
-    //var showUserError = document.getElementById(".errorDisplay");
-
+    
     //Below to get the stored users from local storage
     var storedRegList = localStorage.getItem('RegistrationNumbers') ? JSON.parse(localStorage.getItem('RegistrationNumbers')) : {};
     var RegToStore = displayRegNumberPlates(storedRegList);
@@ -82,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function ()
                        
                         localStorage.setItem("RegistrationNumbers", JSON.stringify(getRegPlate));
     
-                        var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
-                        var arrayList = Object.keys(PlatesValues);
+                        //var PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+                       // var arrayList = Object.keys(PlatesValues);
                         
                         showUserError.innerHTML  = '';
                         showNumberPlates(numPlate);  

@@ -12,18 +12,30 @@ document.addEventListener('DOMContentLoaded', function ()
 
 
     let showRegNumParentHandlebars = document.getElementById("parentDisplayHandlebars");
-    let showRegNumHandlebars = document.getElementById("displayHandlebars");
+    //let showRegNumHandlebars = document.getElementById("displayHandlebars");
+
+
+    
 
     //var showUserError = document.getElementById(".errorDisplay");
 
+
+    //Template session .....
+    let showHandlebars = document.querySelector("platesHandlebarsShow");
+    let TemplateSource = document.querySelector(".registration_numbersTemplate").innerHTML;
+    let compileTemplate = Handlebars.compile(TemplateSource);
+
+    
+
     //Below to get the stored users from local storage
-    let storedRegListHandlebars = localStorage.getItem('RegistrationNumbers-Handlebars') ? JSON.parse(localStorage.getItem('RegistrationNumbers-Handlebars')) : {};
-    console.log("LocalStorage: ",storedRegListHandlebars);
+    let storedRegListHandlebars = localStorage.getItem('RegNumbers') ? JSON.parse(localStorage.getItem('RegNumbers')) : {};
+    //console.log("LocalStorage: ",storedRegListHandlebars);
     let RegToStoreHandlebars = displayRegNumberPlates(storedRegListHandlebars);
 
 
+    //Get the template source
     function checkDuplicateHandlebars(regPlateHandlebars){
-        let valueStoredHandlebars = JSON.parse(localStorage.getItem("RegistrationNumbers-Handlebars"));
+        let valueStoredHandlebars = JSON.parse(localStorage.getItem("RegNumbers"));
     
         RegToStore(valueStoredHandlebars);
         let containsPlateHandlebars = arrayValueStores.some( element => element === numPlateFormat);
@@ -62,8 +74,10 @@ document.addEventListener('DOMContentLoaded', function ()
              let locationHandlebars = numPlateHandlebars.slice(0,3).toUpperCase();
 
              console.log(numPlateHandlebars);
-             if((numPlateHandlebars !== '' && RegToStoreHandlebars.validateInput(numPlateHandlebars) && checkWesternCapePlateHandlebars(location)))
+
+             if((numPlateHandlebars !== '' && RegToStoreHandlebars.validateInput(numPlateHandlebars) && checkWesternCapePlateHandlebars(locationHandlebars)))
              {
+                 console.log("Passes condition!");
      
                 if(storedRegListHandlebars !== null)
                 {
@@ -80,13 +94,20 @@ document.addEventListener('DOMContentLoaded', function ()
                         let getRegPlateHandlebars = RegToStoreHandlebars.getStoredList();
                     
                        
-                        localStorage.setItem("RegistrationNumber-Handlebars", JSON.stringify(getRegPlate));
+                        localStorage.setItem("RegNumbers", JSON.stringify(getRegPlateHandlebars));
     
-                        let PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers-Handlebars"));
-                        let arrayList = Object.keys(PlatesValues);
+                        //let PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
+                        //let arrayList = Object.keys(PlatesValues);
                         console.log("Gets here!!!");
-                        showUserError.innerHTML  = '';
-                        showNumberPlatesHandlebars(numPlateHandlebars);  
+                        showUserErrorHandlebars.innerHTML  = '';
+
+                        showHandlebars.innerHTML = compileTemplate(
+                            {
+                                RegistrationNumbersHandlebars: getRegPlateHandlebars
+                            });
+
+
+                       // showNumberPlatesHandlebars(compileTemplate(numPlateHandlebars));  
                     }
                 }              
              }
@@ -108,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function ()
              var newText = document.createTextNode(regNumbersHandlebars);
             
             newDisplay.appendChild(newText);
-            showRegNumHandlebars.insertBefore(newDisplay, showRegNumHandlebars.childNodes[0]);
+            showHandlebars.insertBefore(newDisplay, showHandlebars.childNodes[0]);
          }
      }
 
@@ -120,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function ()
 
         if (normalFilter !== null)
         {
-            let valueStored = JSON.parse(localStorage.getItem("RegistrationNumbers-Handlebars"));
+            let valueStored = JSON.parse(localStorage.getItem("RegNumbers"));
             let check = displayRegNumberPlates(valueStored);
             
             let selectedTownsArray = check.filterTown(normalFilter);
@@ -144,12 +165,12 @@ document.addEventListener('DOMContentLoaded', function ()
 
   window.addEventListener("load", function()
   {
-    var PlatesValueStored = JSON.parse(localStorage.getItem("RegistrationNumbers-Handlebars"));
+    var PlatesValueStored = JSON.parse(localStorage.getItem("RegNumbers"));
     if(PlatesValueStored !== undefined && PlatesValueStored !== null){
         var arrayValues = Object.keys(PlatesValueStored); 
         for(var p =0; p < arrayValues.length; p++)
         {
-            showNumberPlates(arrayValues[p]);
+           // showNumberPlates(arrayValues[p]);
         }
     }
   })

@@ -28,14 +28,12 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-      <style>
-      
 
-
-      
-      
-      
-      </style>
+      <script type="text/x-template" class="registration_numbersTemplate">
+        {{#each RegistrationNumbersHandlebars}}
+          <li> {{this}}</li>
+        {{/each}}
+      </script>
 
 </head>
 <body>
@@ -73,7 +71,6 @@
         <button class="button show">Filter</button>
 
         <div class="twelve columns  errorDisplay">
-           
         </div>
 
         <ul class"list-plates" id="errors">
@@ -111,11 +108,12 @@
            
         </div>
         
-        <ul class"list-platesHandlebars" id="errors">
-        </ul>
+        <div class"list-platesHandlebars1" id="errors">
+        </div>
 
-        <ul class"list-platesHandlebars" id="display">
-        </ul>
+        <div class"platesHandlebarsShow" id="display">
+
+        </div>
 
 
       </div>
