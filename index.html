@@ -30,8 +30,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
       <script type="text/x-template" class="registration_numbersTemplate">
-        {{#each RegistrationNumbersHandlebars}}
-          <li> {{this}}</li>
+        {{#each RegistrationNumber}}
+          <li class="{{registrationNum}}"> {{this}}</li>
         {{/each}}
       </script>
 
@@ -70,7 +70,7 @@
 
         <button class="button show">Filter</button>
 
-        <div class="twelve columns  errorDisplay">
+        <div class=" errorDisplay">
         </div>
 
         <ul class"list-plates" id="errors">
@@ -81,6 +81,8 @@
 
 
       </div>
+
+
       <div class="six columns" id="box">
         <h4> Handlebars Widget</h4>
 
@@ -104,17 +106,16 @@
 
         <button class="button showHandlebars">Filter</button>
 
-        <div class="twelve columns  errorDisplayHandlebars">
+        <div class=" errorDisplayHandlebars">
            
         </div>
         
         <div class"list-platesHandlebars1" id="errors">
         </div>
 
-        <div class"platesHandlebarsShow" id="display">
+        <div class"plates-handlebars-show" id="display">
 
         </div>
-
 
       </div>
     </div>

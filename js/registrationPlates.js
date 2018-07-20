@@ -1,8 +1,10 @@
+"use strict";
 function displayRegNumberPlates(NumberPlateDatabase) 
 {
 
     var numberPlateDisplay = '';
     var town = '';
+    let RegItem;
 
     var plateStored = NumberPlateDatabase || {};
    
@@ -42,6 +44,18 @@ function displayRegNumberPlates(NumberPlateDatabase)
         return plateStored;
     }
    
+
+
+    function getItem(listItem){
+        
+        for(let p= 0 ; p <listItem.length; p++){
+           RegItem = listItem[p];
+        }
+
+        return RegItem;
+    }
+
+
     function filterRegPlate(TownChoice) 
     {
         var townSelected = [];
@@ -72,8 +86,9 @@ function displayRegNumberPlates(NumberPlateDatabase)
         
         getStoredList: getRegPlateList,
 
-        filterTown:filterRegPlate
+        filterTown:filterRegPlate,
 
+        item : getItem
       
      }
 
