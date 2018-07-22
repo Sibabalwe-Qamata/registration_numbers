@@ -31,7 +31,7 @@
 
       <script type="text/x-template" class="registration_numbersTemplate">
         {{#each RegistrationNumber}}
-          <li class="{{registrationNum}}"> {{this}}</li>
+          <li class='{{registrationNum}}'> {{this}}</li>
         {{/each}}
       </script>
 
@@ -86,7 +86,7 @@
       <div class="six columns" id="box">
         <h4> Handlebars Widget</h4>
 
- <input id="numberPlateHandlebars" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumberHandlebars"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a Number Plate e.g 'CA31004'">
+         <input id="numberPlateHandlebars" onfocus="this.value=''"  value="" placeholder="enter registration number" class="regNumberHandlebars"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a Number Plate e.g 'CA31004'">
 
           <button class="button addHandlebars">Add</button>
           <button class="button resetHandlebars">Reset</button>
@@ -102,22 +102,16 @@
               <option class="selectWhichTown" value="CAW">Somerset West</option>
             </select>
           </div>
-        
-
-        <button class="button showHandlebars">Filter</button>
-
-        <div class=" errorDisplayHandlebars">
-           
-        </div>
-        
-        <div class"list-platesHandlebars1" id="errors">
-        </div>
-
-        <div class"plates-handlebars-show" id="display">
+        <button class="button showHandlebarsFilter">Filter</button>
+        <div class="handlebarsDisplay">
 
         </div>
+
 
       </div>
+
+
+
     </div>
     <b><hr style="margin-top: 1%;margin-bottom:1%;margin-right:1%; background-color:black;"><b>
 
@@ -132,9 +126,12 @@
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+
+</body>
+
 <script src="js/registrationPlates.js" charset="utf-8"></script>
 <script src="js/registrationPlatesDom.js" charset="utf-8"></script>
 <script src="js/registrationTemplateDom.js" charset="utf-8"></script>
-
-</body>
 </html>

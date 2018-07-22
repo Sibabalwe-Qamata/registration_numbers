@@ -1,19 +1,21 @@
 "use strict";
-document.addEventListener('DOMContentLoaded', function () {
+
 
     let regNumTextHandlebars = document.querySelector(".regNumberHandlebars");
     let addBtnHandlebars = document.querySelector(".addHandlebars");
     let resetBtnHandlebars = document.querySelector(".resetHandlebars");
-    let showBtnHandlebars = document.querySelector(".showHandlebars");
+    let showBtnHandlebars = document.querySelector(".showHandlebarsFilter");
+
     //let normalFilter = document.querySelector(".selectWhichTown").value;
-    let DisplayPlatesHandlebars = document.querySelector(".list-platesHandlebars");
+    //let DisplayPlatesHandlebars = document.querySelector(".list-platesHandlebars");
     let showUserErrorHandlebars = document.querySelector(".errorDisplayHandlebars");
 
-
-    let showRegNumParentHandlebars = document.getElementById("parentDisplayHandlebars");
+   
+    
+    //let showRegNumParentHandlebars = document.getElementById("parentDisplayHandlebars");
     //let showRegNumHandlebars = document.getElementById("displayHandlebars");
 
-    document.getElementById(".errorDisplay");
+    //document.getElementById(".errorDisplay");
 
 
     //Template session .....
@@ -75,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (storedRegListHandlebars !== null) {
                 let arrayDuplicateCheck = Object.keys(storedRegListHandlebars);
                 if (arrayDuplicateCheck.includes(numPlateHandlebars) === true) {
-                    showUserErrorHandlebars.innerHTML = "Oops that is a Duplicate. Please enter the correct input!";
+                   // showUserErrorHandlebars.innerHTML = "Oops that is a Duplicate. Please enter the correct input!";
 
                 } else if (arrayDuplicateCheck.includes(numPlateHandlebars) === false) {
                     RegToStoreHandlebars.enterRegPlate(numPlateHandlebars);
@@ -88,37 +90,39 @@ document.addEventListener('DOMContentLoaded', function () {
                     //let PlatesValues = JSON.parse(localStorage.getItem("RegistrationNumbers"));
                     //let arrayList = Object.keys(PlatesValues);
                     console.log("Gets here!!!");
-                    showUserErrorHandlebars.innerHTML = '';
+                   //showUserErrorHandlebars.innerHTML = '';
+                    
+                   //let holdReg = RegToStoreHandlebars.item(listReg);
+                    //console.log(getRegPlateHandlebars);
 
-                    console.log(getRegPlateHandlebars);
+                    
+
+
+                    //console.log(listReg); //Array of items
+                   // console.log(RegToStoreHandlebars.item(listReg));
+
 
                     let listReg = Object.keys(getRegPlateHandlebars);
-
-
-                    console.log(listReg); //Array of items
-                    console.log(RegToStoreHandlebars.item(listReg));
-
-
-                    let holdReg = RegToStoreHandlebars.item(listReg);
-
                     let regInfo = {}
-
                     regInfo['RegistrationNumber'] = listReg;
 
 
-
-                    let showHandlebar = document.querySelector(".list-platesHandlebars1");
                     let TemplateSource = document.querySelector(".registration_numbersTemplate").innerHTML;
+                    let showHandlebar = document.querySelector('.handlebarsDisplay');
+            
                     let compileTemplate = Handlebars.compile(TemplateSource);
 
+                    showHandlebar.innerHTML = compileTemplate(regInfo);
 
-                    let compileRegInfo = compileTemplate(regInfo);
+                    //let compileRegInfo = compileTemplate(regInfo);
                     //console.log(regInfo);
-                    showHandlebar.innerHTML = compileRegInfo;
 
+                    //console.log(compileRegInfo);
+                   
 
                     // showNumberPlatesHandlebars(compileTemplate(numPlateHandlebars));  
                 }
+                
             }
         } else if ((RegToStoreHandlebars.validateInput(numPlateHandlebars) === false)) {
             showUserErrorHandlebars.innerHTML = "Oops that is an Error Input. Please enter the correct input!";
@@ -190,4 +194,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-});
